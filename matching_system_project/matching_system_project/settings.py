@@ -75,6 +75,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Installed Applications
+# http://www.tangowithdjango.com/book/chapters/setup.html
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+    'matching_system_project'
+)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
