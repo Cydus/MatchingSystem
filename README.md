@@ -1,4 +1,4 @@
 MatchingSystem2
 ==============
 
-An organ donor matching system written in Django by University of Glasgow students
+Position   allocation within project   system written in Django by University of Glasgow students
