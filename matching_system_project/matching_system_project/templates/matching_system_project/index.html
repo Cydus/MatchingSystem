@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+{% load static %} <!-- New line -->
+
+<html>
+
+<head>
+  <title>Matching System</title>
+</head>
+
+<body>
+<div id="header">
+  <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
+</div>
+<h1>Rango says...</h1>
+hello world! <strong>{{ boldmessage }}</strong><br />
+<a href="/rango/about/">About</a><br />
+</body>
+
+</html>
