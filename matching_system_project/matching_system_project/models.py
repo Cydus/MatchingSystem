@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -23,7 +24,7 @@ class Project(models.Model):
 class Position(models.Model):
     # id automatically generated
     title = models.CharField(max_length=128)
-    ApplicationID = models.ForeignKey('Project')
+    ProjectID = models.ForeignKey('Project')
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
     starts = models.DateField(verbose_name="Start Date")
@@ -31,6 +32,31 @@ class Position(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class Offer(models.Model):
+    # id automatically generated
+    UserID = models.ForeignKey(User)
+    ApplicationID = models.ForeignKey('Application')
+    message = models.TextField(max_length=999)
+    Accepted = models.BooleanField(default=True)
+    created = models.DateField(auto_now_add=True)
+    expires = models.DateField(name="End Date")
+
+    def __unicode__(self):
+        return self.pk
+
+class Application(models.Model):
+    # id automatically generated
+    UserID = models.ForeignKey(User)
+    PositionID = models.ForeignKey('Position')
+    message = models.TextField(max_length=999)
+    created = models.DateField(auto_now_add=True)
+    expires = models.DateField(name="End Date")
+    successful = models.BooleanField(default=False)
+    seen = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return (self.UserID.username + ' -> ' + '[' + self.PositionID.ProjectID.title + ']' + self.PositionID.title)
 
 class Page(models.Model):
     category = models.ForeignKey(Category)
