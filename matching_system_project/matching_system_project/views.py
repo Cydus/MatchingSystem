@@ -24,3 +24,7 @@ def index(request):
 
 def projects(request):
     return HttpResponse("PROJECTS IN YOUR FACE MOFO")
+
+def project(request):
+    return HttpResponse("A single project")
+
