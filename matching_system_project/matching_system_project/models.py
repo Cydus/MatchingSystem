@@ -15,7 +15,7 @@ class Project(models.Model):
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
     starts = models.DateField(verbose_name="Start Date")
-    expires = models.DateField(name="End Date")
+    expires = models.DateField(verbose_name="End Date")
     active = models.BooleanField(default=True)
 
     def __unicode__(self):
@@ -25,6 +25,7 @@ class Position(models.Model):
     # id automatically generated
     title = models.CharField(max_length=128)
     ProjectID = models.ForeignKey('Project')
+    # @TODO Update ER Diagram, winningAppID fk removed
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
     starts = models.DateField(verbose_name="Start Date")
