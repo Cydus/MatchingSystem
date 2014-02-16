@@ -1,9 +1,12 @@
 from django.contrib import admin
-from models import Category, Page, Project, Position, Application, Offer
+from models import Project, Position, Application, Offer
 
-admin.site.register(Category)
-admin.site.register(Page)
-admin.site.register(Project)
+#admin.site.register(Project)
 admin.site.register(Position)
 admin.site.register(Application)
 admin.site.register(Offer)
+
+class ProjectAdmin(admin.ModelAdmin):
+        list_display = ('name', 'description')
+
+admin.site.register(Project, ProjectAdmin)

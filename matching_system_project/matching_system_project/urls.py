@@ -12,7 +12,10 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'projects/', views.projects, name='projects'),
+    # @TODO make this url work for single worlds
+    url(r'^projects/(?P<project_name_url>\w+)/$', views.project, name='project'),  # New!
+    #url(r'projects/', views.projects, name='projects'),
+
 )
 
 if settings.DEBUG:
