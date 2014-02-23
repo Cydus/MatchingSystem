@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     # id automatically generated
-    name = models.CharField(max_length=128, unique=True)
+    projectName = models.CharField(max_length=128, unique=True)
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
     starts = models.DateField(verbose_name="Start Date")
@@ -13,7 +13,7 @@ class Project(models.Model):
     active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.name
+        return self.projectName
 
 class Position(models.Model):
     # id automatically generated
@@ -21,34 +21,25 @@ class Position(models.Model):
     ProjectID = models.ForeignKey('Project')
     # @TODO Update ER Diagram, winningAppID fk removed
     description = models.TextField(max_length=999)
-    created = models.DateField(auto_now_add=True)
-    starts = models.DateField(verbose_name="Start Date")
-    expires = models.DateField(name="End Date")
+    dateTimeCreated = models.DateField(auto_now_add=True)
+    dateTimeStarts = models.DateField(verbose_name="Start Date")
+    dateTimeExpires = models.DateField(name="End Date")
+
+    fk_ApplicantID = models.ForeignKey(User, null=True, blank=True)
+    #fk_MProjectManager = models.ForeignKey(default=User.email)
+    isOpen = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.title
-
-class Offer(models.Model):
-    # id automatically generated
-    UserID = models.ForeignKey(User)
-    ApplicationID = models.ForeignKey('Application')
-    message = models.TextField(max_length=999)
-    Accepted = models.BooleanField(default=True)
-    created = models.DateField(auto_now_add=True)
-    expires = models.DateField(name="End Date")
-
-    def __unicode__(self):
-        return self.pk
 
 class Application(models.Model):
     # id automatically generated
     UserID = models.ForeignKey(User)
     PositionID = models.ForeignKey('Position')
-    message = models.TextField(max_length=999)
-    created = models.DateField(auto_now_add=True)
-    expires = models.DateField(name="End Date")
-    successful = models.BooleanField(default=False)
-    seen = models.BooleanField(default=False)
+    dateTimeCreated = models.DateField(auto_now_add=True)
+    #expires = models.DateField(name="End Date")
+    accepted = models.BooleanField(default=False)
+    seenByPM = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return (self.UserID.username + ' -> ' + '[' + self.PositionID.ProjectID.name + ']' + self.PositionID.name)
+        return (self.UserID.username + ' applied for:  ' + 'Project: ' + self.PositionID.ProjectID.projectName + ' |  Position: ' + self.PositionID.title)
