@@ -5,9 +5,28 @@ import time
 
 def populate():
 
-    add_Group(name="Project Manager")
+    usernames = ["Larry",]
+
+    pm_group = add_Group(name="Project Manager")
+
     add_Group(name="Applicant")
-    add_Group(name="assholes")
+    chosen_group = add_Group(name="assholes")
+
+    add_user(username="AJones49",
+        email="davidb1985@gmail.com",
+        firstname="Alexander",
+        lastname="Jones",
+        password="password",
+        is_staff = 1,)
+
+    add_user(username="Richard44",
+             email="davidb1985@gmail.com",
+             firstname="Richard",
+             lastname="Anderson",
+             password="password",
+             is_staff = 0,)
+
+    #add_user_to_group(user=aj, group=chosen_group)
 
     intranet = add_project(projectName="Company Intranet",
                 description="We are building a new intranet that brings management and development under one roof",
@@ -101,6 +120,16 @@ def add_application(dateTimeCreated, accepted, seenByPM):
     a = Application.objects.get_or_create(dateTimeCreated=dateTimeCreated, accepted=accepted, seenByPM=seenByPM)
     return a
 
+def add_user(username, email, firstname, lastname, password, is_staff):
+    u = User.objects.get_or_create(username=username, email=email, first_name=firstname, last_name=lastname, password=password, is_staff = is_staff)
+    #application, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, password, position, user_permissions, username
+    return u
+
+# def add_user_to_group(user, group, self):
+
+
+
+    #g.user_set_add(user)
 # def add_user():
 #     u = User.objects.get_or_create()
 #     return u
@@ -116,5 +145,5 @@ if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'matching_system_project.settings')
     from matching_system_project.models import Project, Position, Application
         #, UserProfile, User
-    from django.contrib.auth.models import Group, Permission
+    from django.contrib.auth.models import Group, Permission, User, UserManager, AbstractUser, PermissionManager, PermissionsMixin, GroupManager
     populate()
