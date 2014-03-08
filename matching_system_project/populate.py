@@ -5,19 +5,16 @@ import time
 
 def populate():
 
-    usernames = ["Larry",]
-
-    pm_group = add_Group(name="Project Manager")
-
     add_Group(name="Applicant")
-    chosen_group = add_Group(name="assholes")
+
+
 
     add_user(username="AJones49",
-        email="davidb1985@gmail.com",
-        firstname="Alexander",
-        lastname="Jones",
-        password="password",
-        is_staff = 1,)
+             email="davidb1985@gmail.com",
+             firstname="Alexander",
+             lastname="Jones",
+             password="password",
+             is_staff = 1,)
 
     add_user(username="Richard44",
              email="davidb1985@gmail.com",
@@ -26,7 +23,42 @@ def populate():
              password="password",
              is_staff = 0,)
 
-    #add_user_to_group(user=aj, group=chosen_group)
+    add_user(username="SarahJ",
+             email="sarahjohnson@gmail.com",
+             firstname="Sarah",
+             lastname="Johnson",
+             password="password",
+             is_staff = 1,)
+
+    add_user(username="SimonB",
+             email="simon0124@gmail.com",
+             firstname="Simon",
+             lastname="Black",
+             password="password",
+             is_staff = 0,)
+
+    add_user(username="Anne14",
+             email="annebold@gmail.com",
+             firstname="Anne",
+             lastname="Bold",
+             password="password",
+             is_staff = 0,)
+
+    add_user(username="Alex777",
+             email="alex1802@gmail.com",
+             firstname="Alexander",
+             lastname="Powell",
+             password="password",
+             is_staff = 0,)
+
+    add_user(username="Mike",
+             email="mike@gmail.com",
+             firstname="Michael",
+             lastname="Barrows",
+             password="password",
+             is_staff=0, )
+
+
 
     intranet = add_project(projectName="Company Intranet",
                 description="We are building a new intranet that brings management and development under one roof",
@@ -35,47 +67,20 @@ def populate():
                 expires="2015-07-15",
                 active=True,)
 
-    from matching_system_project.models import Project
+    infrastructure = add_project(projectName="Fibre optic infrastructure",
+                description="New fiber optics are important for the future of the company, network engineers and architects are needed urgently for this overhaul.",
+                created="2013-02-28",
+                starts="2014-04-15",
+                expires="2014-12-15",
+                active=True,)
 
-    add_position(title="Web Developer",
-                 projectID=intranet,
-                 description="ff",
-                 dateTimeCreated="2014-03-20",
-                 dateTimeStarts="2014-05-15",
-                 dateTimeExpires="2015-02-10",
-                 isOpen=True,)
+    informationRetrieval = add_project(projectName="Information Retrieval Research Group",
+                description="The company is forming a group to research neural search. Let's build something awesome!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,)
 
-    # add_application(dateTimeCreated="2014-03-23",
-    #                 accepted=False,
-    #                 seenByPM=False,)
-
-
-
-
-
-    # add_user(username="Mike",
-    #          password="football",
-    #          emailAddress="mike@gmail.com",
-    #          firstName="Michael",
-    #          surname="Barrows",)
-    #
-    # add_userProfile(user="Mike",
-    #                 interest="java",)
-
-    # add_project(name="Fiber optic infrastructure",
-    #             description="New fiber optics are important fot the future of the company, network engineers and architects are needed urgently for this overhaul.",
-    #             created="2013-03-16",
-    #             starts="2014-04-15",
-    #             expires="2014-12-15",
-    #             active=True,)
-#
-#     add_project(name="Information retrieval research group",
-#                 description="The company is forming a group to research neural search. Lets build something awesome!",
-#                 created="2014-03-16",
-#                 starts="2014-04-15",
-#                 expires="2014-08-15",
-#                 active=True,)
-#
 #     add_project(name="Cow Milking Robot 3.0",
 #                 description="The last cow milking robots were a huge disaster. University 2.0 must harness its bovine talent to suceed at this goal.",
 #                 created="2014-03-23",
@@ -104,6 +109,69 @@ def populate():
 #                 expires="2014-0-25",
 #                 active=True,)
 
+
+    webDeveloper = add_position(title="Web Developer",
+                 projectID=intranet,
+                 description="Design web pages, sites or applications. Provide attractive and capable web applications",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,)
+
+
+    networkArchitecture = add_position(title="Network Architect",
+                 projectID=intranet,
+                 description="Responsible for designing computer networks, including local area networks (LANs), wide area networks (WANs), the Internet, intranets, and other data communications systems. Creates, tests, and evaluates networks.",
+                 dateTimeCreated="2014-03-22",
+                 dateTimeStarts="2014-05-17",
+                 dateTimeExpires="2015-02-01",
+                 isOpen=True,)
+
+    systemProgrammer = add_position(title="System Programmer",
+                 projectID=infrastructure,
+                 description="Produce, install and implement new and modified computer systems, networks and related operating software",
+                 dateTimeCreated="2014-04-12",
+                 dateTimeStarts="2014-05-25",
+                 dateTimeExpires="2015-07-15",
+                 isOpen=True,)
+
+    securitySpecialist = add_position(title="Security Specialist",
+                 projectID=informationRetrieval,
+                 description="Safeguards information system assets by identifying and solving potential and actual security problems.",
+                 dateTimeCreated="2014-03-18",
+                 dateTimeStarts="2014-05-01",
+                 dateTimeExpires="2015-10-15",
+                 isOpen=False,)
+
+
+
+    add_application(dateTimeCreated="2014-03-05",
+                    accepted=False,
+                    seenByPM=False,
+                    UserID=User.objects.get(username='Mike'),
+                    PositionID=webDeveloper,)
+
+
+    add_application(dateTimeCreated="2014-03-08",
+                    accepted=False,
+                    seenByPM=True,
+                    UserID=User.objects.get(username='AJones49'),
+                    PositionID=securitySpecialist,)
+
+
+    add_application(dateTimeCreated="2014-03-07",
+                    accepted=True,
+                    seenByPM=True,
+                    UserID=User.objects.get(username='SarahJ'),
+                    PositionID=networkArchitecture,)
+
+    add_application(dateTimeCreated="2014-03-01",
+                    accepted=True,
+                    seenByPM=False,
+                    UserID=User.objects.get(username='Anne14'),
+                    PositionID=systemProgrammer,)
+
+
 def add_project(projectName, description, created, starts, expires, active):
     c = Project.objects.get_or_create(projectName=projectName, description=description, created=created, starts=starts, expires=expires, active=active)[0]
     return c
@@ -116,27 +184,13 @@ def add_position(title, projectID, description, dateTimeCreated, dateTimeStarts,
     p = Position.objects.get_or_create(title=title, projectID=projectID, description=description, dateTimeCreated=dateTimeCreated,dateTimeStarts=dateTimeStarts, dateTimeExpires=dateTimeExpires, isOpen=isOpen)[0]
     return p
 
-def add_application(dateTimeCreated, accepted, seenByPM):
-    a = Application.objects.get_or_create(dateTimeCreated=dateTimeCreated, accepted=accepted, seenByPM=seenByPM)
-    return a
-
 def add_user(username, email, firstname, lastname, password, is_staff):
     u = User.objects.get_or_create(username=username, email=email, first_name=firstname, last_name=lastname, password=password, is_staff = is_staff)
-    #application, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, password, position, user_permissions, username
     return u
 
-# def add_user_to_group(user, group, self):
-
-
-
-    #g.user_set_add(user)
-# def add_user():
-#     u = User.objects.get_or_create()
-#     return u
-#
-# def add_userProfile(user, interest):
-#     u = UserProfile(user=user, interest=interest)
-#     return u
+def add_application(UserID, PositionID, dateTimeCreated, accepted, seenByPM):
+    a = Application.objects.get_or_create(dateTimeCreated=dateTimeCreated, accepted=accepted, seenByPM=seenByPM, UserID=UserID, PositionID=PositionID)
+    return a
 
 
 # Start execution here!
@@ -144,6 +198,6 @@ if __name__ == '__main__':
     print "Starting PMS population script..."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'matching_system_project.settings')
     from matching_system_project.models import Project, Position, Application
-        #, UserProfile, User
-    from django.contrib.auth.models import Group, Permission, User, UserManager, AbstractUser, PermissionManager, PermissionsMixin, GroupManager
+
+    from django.contrib.auth.models import Group, BaseUserManager, Permission, User, UserManager, AbstractUser, PermissionManager, PermissionsMixin, GroupManager
     populate()
