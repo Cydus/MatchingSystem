@@ -43,22 +43,36 @@ def project(request, project_name_url):
     # We can then simply replace the underscores with spaces again to get the title.
     project_name = project_name_url.replace('_', ' ' )
 
+    print project_name
+
+    project = Project.objects.get(projectName=project_name)
+
+    # Change underscores in the project title to spaces.
+    # URLs don't handle spaces well, so we encode them as underscores.
+    # We can then simply replace the underscores with spaces again to get the title.
+    project_name = project_name_url.replace('_', ' ' )
+
     # Create a context dictionary which we can pass to the template rendering engine.
     # We start by containing the title of the project passed by the user.
     context_dict = {'project_name': project_name}
+    context_dict = {
+        'boldmessage': project,
+        'description': project.description,
+    }
 
     try:
         # Can we find a project with the given title?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        project = Project.objects.get(projectName=project_name)
+
+        #print project
 
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
-        positions = Position.objects.filter(project=project)
+        #positions = Position.objects.filter(project=project)
 
         # Adds our results list to the template context under title pages.
-        context_dict['positions'] = positions
+        #context_dict['positions'] = positions
         # We also add the project object from the database to the context dictionary.
         # We'll use this in the template to verify that the project exists.
         context_dict['project'] = project
@@ -67,9 +81,7 @@ def project(request, project_name_url):
         # Don't do anything - the template displays the "no project" message for us.
         pass
 
-
-
     #return HttpResponse("I AM A PROJECT")
-    return HttpResponse("----- Project: " + project_name +  " ------")
+    return render_to_response('matching_system_project/project.html', context_dict, context)
 
 

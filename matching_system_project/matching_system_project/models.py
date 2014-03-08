@@ -12,7 +12,7 @@ class Project(models.Model):
     active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.projectName
+        return self.projectName.lower()
 
 class Position(models.Model):
     title = models.CharField(max_length=128)
@@ -26,7 +26,7 @@ class Position(models.Model):
     isOpen = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.title
+        return self.title.lower()
 
 class Application(models.Model):
     UserID = models.ForeignKey(User)
