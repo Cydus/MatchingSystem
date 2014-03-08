@@ -50,7 +50,7 @@ def project(request, project_name_url):
         # Can we find a project with the given title?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        project = Project.objects.get(name=project_name)
+        project = Project.objects.get(projectName=project_name)
 
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
@@ -65,6 +65,8 @@ def project(request, project_name_url):
         # We get here if we didn't find the specified project.
         # Don't do anything - the template displays the "no project" message for us.
         pass
+
+
 
     #return HttpResponse("I AM A PROJECT")
     return HttpResponse("----- Project: " + project_name +  " ------")
