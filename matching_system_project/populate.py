@@ -65,21 +65,24 @@ def populate():
                 created="2014-03-15",
                 starts="2014-04-15",
                 expires="2015-07-15",
-                active=True,)
+                active=True,
+                url="company_intranet",)
 
     infrastructure = add_project(projectName="Fibre optic infrastructure",
                 description="New fiber optics are important for the future of the company, network engineers and architects are needed urgently for this overhaul.",
                 created="2013-02-28",
                 starts="2014-04-15",
                 expires="2014-12-15",
-                active=True,)
+                active=True,
+                url="fibre_optic_infrastructure")
 
     informationRetrieval = add_project(projectName="Information Retrieval Research Group",
                 description="The company is forming a group to research neural search. Let's build something awesome!",
                 created="2014-03-02",
                 starts="2014-03-25",
                 expires="2014-08-15",
-                active=True,)
+                active=True,
+                url = "information_retrieval_research_group",)
 
 #     add_project(name="Cow Milking Robot 3.0",
 #                 description="The last cow milking robots were a huge disaster. University 2.0 must harness its bovine talent to suceed at this goal.",
@@ -116,7 +119,8 @@ def populate():
                  dateTimeCreated="2014-03-20",
                  dateTimeStarts="2014-05-15",
                  dateTimeExpires="2015-02-10",
-                 isOpen=True,)
+                 isOpen=True,
+                 url="web_developer")
 
 
     networkArchitecture = add_position(title="Network Architect",
@@ -125,7 +129,8 @@ def populate():
                  dateTimeCreated="2014-03-22",
                  dateTimeStarts="2014-05-17",
                  dateTimeExpires="2015-02-01",
-                 isOpen=True,)
+                 isOpen=True,
+                 url="network_architect",)
 
     systemProgrammer = add_position(title="System Programmer",
                  projectID=infrastructure,
@@ -133,7 +138,8 @@ def populate():
                  dateTimeCreated="2014-04-12",
                  dateTimeStarts="2014-05-25",
                  dateTimeExpires="2015-07-15",
-                 isOpen=True,)
+                 isOpen=True,
+                 url="system_programmer",)
 
     securitySpecialist = add_position(title="Security Specialist",
                  projectID=informationRetrieval,
@@ -141,7 +147,8 @@ def populate():
                  dateTimeCreated="2014-03-18",
                  dateTimeStarts="2014-05-01",
                  dateTimeExpires="2015-10-15",
-                 isOpen=False,)
+                 isOpen=False,
+                 url="security_specialist",)
 
 
 
@@ -172,16 +179,16 @@ def populate():
                     PositionID=systemProgrammer,)
 
 
-def add_project(projectName, description, created, starts, expires, active):
-    c = Project.objects.get_or_create(projectName=projectName, description=description, created=created, starts=starts, expires=expires, active=active)[0]
+def add_project(projectName, description, created, starts, expires, active, url):
+    c = Project.objects.get_or_create(url=url ,projectName=projectName, description=description, created=created, starts=starts, expires=expires, active=active)[0]
     return c
 
 def add_Group(name):
     g = Group.objects.get_or_create(name=name)
     return g
 
-def add_position(title, projectID, description, dateTimeCreated, dateTimeStarts, dateTimeExpires, isOpen):
-    p = Position.objects.get_or_create(title=title, projectID=projectID, description=description, dateTimeCreated=dateTimeCreated,dateTimeStarts=dateTimeStarts, dateTimeExpires=dateTimeExpires, isOpen=isOpen)[0]
+def add_position(url, title, projectID, description, dateTimeCreated, dateTimeStarts, dateTimeExpires, isOpen):
+    p = Position.objects.get_or_create(url=url, title=title, projectID=projectID, description=description, dateTimeCreated=dateTimeCreated,dateTimeStarts=dateTimeStarts, dateTimeExpires=dateTimeExpires, isOpen=isOpen)[0]
     return p
 
 def add_user(username, email, firstname, lastname, password, is_staff):

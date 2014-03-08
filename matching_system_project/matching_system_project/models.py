@@ -10,9 +10,13 @@ class Project(models.Model):
     starts = models.DateField(verbose_name="Start Date")
     expires = models.DateField(verbose_name="End Date")
     active = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return self.projectName.lower()
+    url = models.URLField(max_length=256)
+    #
+    # def save(self):
+    #     if not self.url:
+    #         self.url = "tttt"
+    #     super(Project, self).save()
+    #
 
 class Position(models.Model):
     title = models.CharField(max_length=128)
@@ -21,6 +25,7 @@ class Position(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True)
     dateTimeStarts = models.DateField(verbose_name="Start Date")
     dateTimeExpires = models.DateField(verbose_name="End Date")
+    url = models.URLField(max_length=256)
 
     fk_ApplicantID = models.ForeignKey(User, null=True, blank=True)
     isOpen = models.BooleanField(default=True)
@@ -34,6 +39,7 @@ class Application(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
+    # url = models.CharField(max_length=128)
 
     def __unicode__(self):
         # + 'Project: ' + self.PositionID.ProjectID.projectName +

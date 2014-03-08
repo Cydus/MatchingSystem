@@ -34,7 +34,6 @@ def projects(request):
 
 def project(request, project_name_url):
 
-
     # Request our context from the request passed to us.
     context = RequestContext(request)
 
@@ -43,22 +42,31 @@ def project(request, project_name_url):
     # We can then simply replace the underscores with spaces again to get the title.
     project_name = project_name_url.replace('_', ' ' )
 
-    print project_name
-
-    project = Project.objects.get(projectName=project_name)
+    project = Project.objects.get(url=project_name_url)
 
     # Change underscores in the project title to spaces.
     # URLs don't handle spaces well, so we encode them as underscores.
     # We can then simply replace the underscores with spaces again to get the title.
     project_name = project_name_url.replace('_', ' ' )
 
+    # position lis
+
+    position_list = Position.objects.all()
+    print position_list
+
+    position_dict ={'positions':position_list}
+
     # Create a context dictionary which we can pass to the template rendering engine.
     # We start by containing the title of the project passed by the user.
     context_dict = {'project_name': project_name}
     context_dict = {
-        'boldmessage': project,
+        'projectName': project.projectName,
         'description': project.description,
+        'position_list': position_list,
+
     }
+
+
 
     try:
         # Can we find a project with the given title?

@@ -12,14 +12,14 @@
 <div id="header">
   <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
 </div>
-<h1>{{ boldmessage }}</h1>
+<h1>{{ projectName }}</h1>
 <h3>{{ description }}</h3>
-  <strong>{{ boldmessage }}</strong><br />
 
-{% if positions %}
+{% if position_list %}
   <ul>
-    {% for position in positions %}
-       {% if position.isOpen %}
+    {% for position in position_list %}
+       {% if projectName == position.projectID.projectName %}
+
       <hr>
       <p>
           {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
@@ -27,7 +27,6 @@
           {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
 
       </p>
-      <a href={{position.projectID}}>{{position.projectID}} </a>
       <p>
           {{position.description}}
       </p>
