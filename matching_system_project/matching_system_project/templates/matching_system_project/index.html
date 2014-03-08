@@ -6,19 +6,35 @@
 
 <head>
   <title>Matching System</title>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 
 <body>
 <div id="header">
   <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
 </div>
-<h1>Rango says...</h1>
-hello world! <strong>{{ boldmessage }}</strong><br />
+<h1>Rango says...</h1>  <h3>Screw you guys I'm going home</h3>
+  <strong>{{ boldmessage }}</strong><br />
 
-{% if projects %}
+{% if positions %}
   <ul>
-    {% for project in projects %}
-      <li>{{ project.projectName }}</li>
+    {% for position in positions %}
+       {% if position.isOpen %}
+      <hr>
+      <p>
+          {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
+
+          {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
+
+      </p>
+      <a href={{position.projectID}}>{{position.projectID}} </a>
+      <p>
+          {{position.description}}
+      </p>
+      <br/>
+      <a href="{{position.projectID}}">Apply</a>
+      <hr>
+       {% endif %}
     {% endfor %}
   </ul>
 {% else %}
