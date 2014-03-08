@@ -11,10 +11,6 @@ class Project(models.Model):
     expires = models.DateField(verbose_name="End Date")
     active = models.BooleanField(default=True)
 
-    # from django import forms
-    # class testDataForm(forms.Form):
-    #     title =
-
     def __unicode__(self):
         return self.projectName
 
@@ -27,7 +23,6 @@ class Position(models.Model):
     dateTimeExpires = models.DateField(verbose_name="End Date")
 
     fk_ApplicantID = models.ForeignKey(User, null=True, blank=True)
-    #fk_MProjectManager = models.ForeignKey(default=User.email)
     isOpen = models.BooleanField(default=True)
 
     def __unicode__(self):
@@ -35,19 +30,12 @@ class Position(models.Model):
 
 class Application(models.Model):
     UserID = models.ForeignKey(User)
-    PositionID = models.ForeignKey('Position')
+    PositionID = models.ForeignKey(Position)
     dateTimeCreated = models.DateField(auto_now_add=True)
-    #expires = models.DateField(name="End Date")
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return (self.UserID.username + ' applied for:  ' + 'Project: ' + self.PositionID.ProjectID.projectName + ' |  Position: ' + self.PositionID.title)
+        # + 'Project: ' + self.PositionID.ProjectID.projectName +
+        return (self.UserID.username + ' applied for: ' + self.PositionID.title)
 
-#
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User)
-#     interest = models.CharField(max_length=128)
-#
-#     def __unicode__(self):
-#         return self.user.username

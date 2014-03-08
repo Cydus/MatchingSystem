@@ -16,14 +16,15 @@ def index(request):
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!
 
     #context_dict = {'boldmessage': "I am bold font from the context"}
-    project_list = Project.objects.all()
-    context_dict = {'projects': project_list}
-
+   # project_list = Project.objects.all()
+  #  project_dict = {'projects': project_list}
+    position_list = Position.objects.all()
+    position_dict ={'positions':position_list}
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
-    return render_to_response('matching_system_project/index.html', context_dict, context)
+    return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
     #                     '<a href="/projects">View Projects</a>')
