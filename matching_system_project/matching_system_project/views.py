@@ -4,6 +4,8 @@ from django.shortcuts import render_to_response
 from models import Project
 from models import Position
 
+from matching_system_project.forms import ProjectForm
+
 from django.http import HttpResponse
 
 def index(request):
@@ -92,4 +94,19 @@ def project(request, project_name_url):
     #return HttpResponse("I AM A PROJECT")
     return render_to_response('matching_system_project/project.html', context_dict, context)
 
+
+
+def add_project(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = ProjectForm()
+
+    return render_to_response('matching_system_project/add_project.html', {'form': form}, context)
 
