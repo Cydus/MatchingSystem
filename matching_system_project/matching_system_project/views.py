@@ -4,28 +4,15 @@ from django.shortcuts import render_to_response
 from models import Project
 from models import Position
 
-from matching_system_project.forms import ProjectForm
+from matching_system_project.forms import ProjectForm, PositionForm
 
 from django.http import HttpResponse
 
 def index(request):
 
-    # Request the context of the request.
-    # The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
-
-    # Construct a dictionary to pass to the template engine as its context.
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-
-    #context_dict = {'boldmessage': "I am bold font from the context"}
-   # project_list = Project.objects.all()
-  #  project_dict = {'projects': project_list}
     position_list = Position.objects.all()
     position_dict ={'positions':position_list}
-
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
     return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
@@ -107,4 +94,23 @@ def add_project(request):
         form = ProjectForm()
 
     return render_to_response('matching_system_project/add_project.html', {'form': form}, context)
+
+def add_position(request):
+
+    context = RequestContext(request)
+    if request.method == 'POST':
+        form = PositionForm(request.POST)
+        if form.is_valid():
+
+
+
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = PositionForm()
+
+
+    return render_to_response('matching_system_project/add_position.html', {'form': form}, context)
 

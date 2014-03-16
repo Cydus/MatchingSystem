@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     # @TODO make this url work for single worlds
     url(r'^projects/add_project/$', views.add_project, name='add_project'), # alina forms
+    url(r'^projects/add_position/$', views.add_position, name='add_position'), # alina forms
     url(r'^projects/(?P<project_name_url>\w+)/$', views.project, name='project'),  # New!
 )
 #

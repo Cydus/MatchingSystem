@@ -18,6 +18,11 @@ class Project(models.Model):
     #     super(Project, self).save()
     #
 
+    def __unicode__(self):
+        return self.projectName.lower()
+
+
+
 class Position(models.Model):
     title = models.CharField(max_length=128)
     projectID = models.ForeignKey('Project')
