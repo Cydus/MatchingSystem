@@ -112,6 +112,7 @@ def populate():
 #                 expires="2014-0-25",
 #                 active=True,)
 
+    # Positions
 
     webDeveloper = add_position(title="Web Developer",
                  projectID=intranet,
@@ -121,6 +122,15 @@ def populate():
                  dateTimeExpires="2015-02-10",
                  isOpen=True,
                  url="web_developer")
+
+    informationArchitect = add_position(title="Information Architect",
+                                projectID=intranet,
+                                description="Develop the intranets navigation, menus and overall content structure. Applicant should be fully versed in information theroy and have a good idea of intranet usability",
+                                dateTimeCreated="2014-03-20",
+                                dateTimeStarts="2014-05-15",
+                                dateTimeExpires="2015-02-10",
+                                isOpen=True,
+                                url="information-architect")
 
 
     networkArchitecture = add_position(title="Network Architect",
@@ -152,7 +162,7 @@ def populate():
                  isOpen=False,
                  url="security_specialist",)
 
-
+    # Applications
 
     add_application(dateTimeCreated="2014-03-05",
                     accepted=False,

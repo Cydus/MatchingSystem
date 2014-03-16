@@ -68,8 +68,6 @@ def project(request, project_name_url):
 
     }
 
-
-
     try:
         # Can we find a project with the given title?
         # If we can't, the .get() method raises a DoesNotExist exception.
