@@ -7,7 +7,18 @@ def populate():
 
     add_Group(name="Applicant")
 
+    names = ["blushfold", "shyrope", "gearstall", "lightningsleepy", "napkingleaming", "vagueludicrous", "feathertangy", "stickersspare", "gonzobumper", "barerunny", "metalgoombah", "minergoldsword", "obtainablefalcon", "geldingprevious", "coatden", "lostpacked", "ticketslither", "dustercows", "bogglingbrain", "stupendousskirting", "rakingprofuse", "knobslipped", "noodlerubber", "shockunicyclist", "jawblobby", "snailtractor", "prettyunwieldy", "holytremendous", "windyflashing", "broadmeat", "rustleflippant", "sudaneseplaying", "snoopgolfing", "colonystormy", "brutaltooth", "quaintpelvis", "rollgeneration", "audiencefartlek", "ruddystinging", "lobsternippy", "itchgobbledygook", "glossyrook", "blizzardcheeks", "cluckhoitytoity", "apricottrap", "groverink", "leaptriathlete", "twitchyjohns", "rottenbutty", "spectaclesrare"]
+    fnames = ["Mary", "Anna", "Emma", "Elizabeth", "Minnie", "Margaret", "Ida", "Alice", "Bertha", "Sarah", "Annie", "Clara", "Ella", "Florence", "Cora", "Martha", "Laura", "Nellie", "Grace", "Carrie", "Maude", "Mabel", "Bessie", "Jennie", "Gertrude", "Julia", "Hattie", "Edith", "Mattie", "Rose", "Catherine", "Lillian", "Ada", "Lillie", "Helen", "Jessie", "Louise", "Ethel", "Lula", "Myrtle", "Eva", "Frances", "Lena", "Lucy", "Edna", "Maggie", "Pearl", "Daisy", "Fannie", "Josephine"]
+    lnames = ["Aaberg", "Aaron", "Abarca", "Abbate", "Abbess", "Abbott", "Abbratozzato", "Abdelnour", "Abderrazzaq", "Abdollah", "Abdous", "Abdullah", "Abdulrazak", "Abe", "Abel", "Abelmann", "Abelson", "Abernathy", "Abnet", "Abraham", "Abraham-Scalapino", "Abrams", "Abramson", "Abromson-Leeman", "Aburdene", "Acambages", "Accardo", "Accomazzi", "Achacoso", "Acker", "Ackerly", "Ackerman", "Acus", "Adair", "Adam", "Adame", "Adams", "Adamson", "Addison", "Ade", "Adelson", "Adelstein", "Adibe", "Adicho", "Adiele", "Adler", "Adolph", "Adorno", "Adourian", "Adrian-Haberly"]
 
+    for i in range(len(names)):
+        add_user(username=names[i],
+            email=names[i]+"@gmail.com",
+            firstname=fnames[i],
+            lastname=lnames[i],
+            password="password",
+            is_staff=0
+            )
 
     add_user(username="AJones49",
              email="davidb1985@gmail.com",
