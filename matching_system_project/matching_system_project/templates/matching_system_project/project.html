@@ -16,9 +16,11 @@
 <h3>{{ description }}</h3>
 
 {% if position_list %}
+  <h2>Open Positions</h2>
   <ul>
     {% for position in position_list %}
        {% if projectName == position.projectID.projectName %}
+          {% if position.isOpen %}
 
       <hr>
       <p>
@@ -33,12 +35,42 @@
       <br/>
       <a href="{{position.projectID}}">Apply</a>
       <hr>
+            {% endif %}
        {% endif %}
     {% endfor %}
   </ul>
 {% else %}
-  <strong>There are no projects present.</strong>
+  <strong>No open positions for this project.</strong>
 {% endif %}
+
+
+{% if position_list %}
+  <h2>Current Team</h2>
+  <ul>
+    {% for position in position_list %}
+      {% if projectName == position.projectID.projectName %}
+        {% if position.isOpen == False %}
+
+          <hr>
+          <p>
+            {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
+
+            {{ position.fk_ApplicantID }}
+
+            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
+
+          </p>
+          <br/>
+{#          <a href="{{position.projectID}}">Apply</a>#}
+          <hr>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% else %}
+  <strong>No open positions for this project.</strong>
+{% endif %}
+
 
 
 <a href="/admin/">ADMIN LOGIN</a><br />
