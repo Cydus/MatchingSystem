@@ -47,8 +47,6 @@ class Application(models.Model):
 
     # if (PositionID.isOpen == False):
 
-    from matching_system_project.models import Position
-
     print "----------------- SETTING " + "" + " TO FALSE -------------------"
 
     # if Position.objects.get(title="Web Developer").isOpen:
