@@ -110,3 +110,5 @@ TEMPLATE_DIRS = (
 # Media Director
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'matching_system_project/matching_system_project/media') # Absolute path to the media directory
+
+LOGIN_URL = '/login/'

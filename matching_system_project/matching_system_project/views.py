@@ -8,8 +8,15 @@ from matching_system_project.forms import UserForm, UserProfileForm
 
 
 from matching_system_project.forms import ProjectForm, PositionForm
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import logout
+
 
 from django.http import HttpResponse
+
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
 
@@ -87,6 +94,9 @@ def project(request, project_name_url):
 def add_project(request):
     context = RequestContext(request)
     if request.method == 'POST':
+
+        # this is returning an error when we add a new project so I commented it
+        # form = ProjectForm(request.POST, user=request.user)
         form = ProjectForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
@@ -104,8 +114,6 @@ def add_position(request):
     if request.method == 'POST':
         form = PositionForm(request.POST)
         if form.is_valid():
-
-
 
             form.save(commit=True)
             return index(request)
@@ -137,9 +145,6 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
-            # if 'picture' in request.FILES:
-            #     profile.picture = request.FILES['picture']
-
             profile.save()
             registered = True
         else:
@@ -148,8 +153,37 @@ def register(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    # Render the template depending on the context.
     return render_to_response(
             'matching_system_project/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
             context)
+
+
+def user_login(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponse("Your account is disabled.")
+        else:
+            print "Invalid login details: {0}, {1}".format(username, password)
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render_to_response('matching_system_project/login.html', {}, context)
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')

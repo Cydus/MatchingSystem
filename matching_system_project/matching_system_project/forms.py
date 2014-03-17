@@ -18,8 +18,6 @@ class ProjectForm(forms.ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
-
-        # If url is not empty and doesn't start with 'http://', prepend 'http://'.
         if url and not url.startswith('http://'):
             url = 'http://' + url
             cleaned_data['url'] = url
@@ -31,6 +29,19 @@ class ProjectForm(forms.ModelForm):
 
         fields = ('projectName', 'description', 'created', 'starts', 'expires', 'active', 'url')
 
+def __init__(self, *args, **kwargs):
+            self._user = kwargs.pop('user')
+            # self._user = kwargs.pop()
+            super(ProjectForm, self).__init__(*args, **kwargs)
+
+def save(self, commit=True):
+            inst = super(ProjectForm, self).save(commit=False)
+            inst.fk_CreatedBy = self._user
+            if commit:
+                inst.save()
+                self.save_m2m()
+            return inst
+
 
 
 class PositionForm(forms.ModelForm):
@@ -39,7 +50,6 @@ class PositionForm(forms.ModelForm):
 
     title = forms.CharField(max_length=128, help_text="Enter a position name")
     projectID = forms.ModelChoiceField(queryset=Project.objects.all())
-    # projectID = forms.ModelChoiceField(Project.objects.all(p))
     description = forms.CharField(max_length=999, help_text="Describe the position")
     dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
     dateTimeStarts = forms.DateField(help_text="Enter the date when the position will start")
@@ -52,7 +62,6 @@ class PositionForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
 
-        # If url is not empty and doesn't start with 'http://', prepend 'http://'.
         if url and not url.startswith('http://'):
             url = 'http://' + url
             cleaned_data['url'] = url
@@ -61,9 +70,6 @@ class PositionForm(forms.ModelForm):
 
     class Meta:
         model = Position
-        # fields = ('title', 'description', 'dateTimeCreated', 'dateTimeStarts', 'dateTimeExpires', 'url', 'isOpen')
-
-
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

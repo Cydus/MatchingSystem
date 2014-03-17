@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^projects/add_position/$', views.add_position, name='add_position'), # alina forms
     url(r'^projects/(?P<project_name_url>\w+)/$', views.project, name='project'),  # New!
     url(r'^register/$', views.register, name='register'), # ADD NEW PATTERN!
+    url(r'^login/$', views.user_login, name='login'),
+    url(r'^restricted/', views.restricted, name='restricted'),
+    url(r'^logout/$', views.user_logout, name='logout'),
 
 
 

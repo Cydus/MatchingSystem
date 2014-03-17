@@ -10,10 +10,29 @@
 </head>
 
 <body>
+
+{% if user.is_authenticated %}
+<a href="/restricted/">Restricted Page</a><br />
+<a href="/logout/">Logout</a><br />
+{% else %}
+<a href="/register/">Register Here</a><br />
+<a href="/login/">Login</a><br />
+{% endif %}
+
+
+
+
 <div id="header">
   <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
 </div>
 <h1>Rango says...</h1>  <h3>Screw you guys I'm going home</h3>
+
+{% if user.is_authenticated %}
+<h1>Rango says... hello {{ user.username }}!</h1>
+{% else %}
+<h1>Rango says... hello world!</h1>
+{% endif %}
+
   <strong>{{ boldmessage }}</strong><br />
 
 {% if positions %}
@@ -47,6 +66,8 @@
 <a href="/projects/add_project">Add a New Project</a>
 <a href="/projects/add_position/">Add a New Position</a>
 <a href="/register/">Register Here</a>
+<a href="/login/">Login</a>
+
 
 
 </body>
