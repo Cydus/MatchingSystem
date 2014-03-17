@@ -9,6 +9,16 @@ admin.site.register(Application)
 
 
 class ProjectAdmin(admin.ModelAdmin):
-        list_display = ('projectName', 'description')
+    list_display = ('projectName', 'description')
+
+    # fieldsets = [
+    #     (None, { 'fields': [('title','body')] } ),
+    #     ]
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'fk_CreatedBy', None) is None:
+            obj.fk_CreatedBy = request.user
+        obj.save()
+
 
 admin.site.register(Project, ProjectAdmin)

@@ -69,9 +69,11 @@ def populate():
              password="password",
              is_staff=0, )
 
+    # Projects
 
-
-    intranet = add_project(projectName="Company Intranet",
+    intranet = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Company Intranet",
                 description="We are building a new intranet that brings management and development under one roof",
                 created="2014-03-15",
                 starts="2014-04-15",
@@ -79,7 +81,9 @@ def populate():
                 active=True,
                 url="company_intranet",)
 
-    infrastructure = add_project(projectName="Fibre optic infrastructure",
+    infrastructure = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Fibre optic infrastructure",
                 description="New fiber optics are important for the future of the company, network engineers and architects are needed urgently for this overhaul.",
                 created="2013-02-28",
                 starts="2014-04-15",
@@ -87,7 +91,9 @@ def populate():
                 active=True,
                 url="fibre_optic_infrastructure")
 
-    informationRetrieval = add_project(projectName="Information Retrieval Research Group",
+    informationRetrieval = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Information Retrieval Research Group",
                 description="The company is forming a group to research neural search. Let's build something awesome!",
                 created="2014-03-02",
                 starts="2014-03-25",
@@ -201,11 +207,6 @@ def populate():
                     UserID=User.objects.get(username='Anne14'),
                     PositionID=systemProgrammer,)
 
-
-def add_project(projectName, description, created, starts, expires, active, url):
-    c = Project.objects.get_or_create(url=url ,projectName=projectName, description=description, created=created, starts=starts, expires=expires, active=active)[0]
-    return c
-
 def add_Group(name):
     g = Group.objects.get_or_create(name=name)
     return g
@@ -217,6 +218,10 @@ def add_position(url, title, projectID, description, dateTimeCreated, dateTimeSt
 def add_user(username, email, firstname, lastname, password, is_staff):
     u = User.objects.get_or_create(username=username, email=email, first_name=firstname, last_name=lastname, password=password, is_staff = is_staff)
     return u
+
+def add_project(fk_CreatedBy, projectName, description, created, starts, expires, active, url):
+    c = Project.objects.get_or_create(fk_CreatedBy=fk_CreatedBy ,projectName=projectName, description=description, created=created, starts=starts, expires=expires, active=active , url=url)[0]
+    return c
 
 def add_application(UserID, PositionID, dateTimeCreated, accepted, seenByPM):
     a = Application.objects.get_or_create(dateTimeCreated=dateTimeCreated, accepted=accepted, seenByPM=seenByPM, UserID=UserID, PositionID=PositionID)

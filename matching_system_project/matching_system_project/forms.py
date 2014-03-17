@@ -28,6 +28,18 @@ class ProjectForm(forms.ModelForm):
 
         fields = ('projectName', 'description', 'created', 'starts', 'expires', 'active', 'url')
 
+    def __init__(self, *args, **kwargs):
+            self._user = kwargs.pop('user')
+            super(ProjectForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+            inst = super(ProjectForm, self).save(commit=False)
+            inst.fk_CreatedBy = self._user
+            if commit:
+                inst.save()
+                self.save_m2m()
+            return inst
+
 
 
 class PositionForm(forms.ModelForm):

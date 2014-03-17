@@ -84,7 +84,7 @@ def project(request, project_name_url):
 def add_project(request):
     context = RequestContext(request)
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, user=request.user)
         if form.is_valid():
             form.save(commit=True)
             return index(request)
@@ -101,8 +101,6 @@ def add_position(request):
     if request.method == 'POST':
         form = PositionForm(request.POST)
         if form.is_valid():
-
-
 
             form.save(commit=True)
             return index(request)
