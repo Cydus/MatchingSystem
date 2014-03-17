@@ -106,7 +106,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
 
-    dob = models.DateField()
+    # dob = models.DateField()
     # posit = models.URLField(blank=True)
 
 
