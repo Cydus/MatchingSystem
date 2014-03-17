@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends 'matching_system_project/base.html' %}
+
     <head>
         <title>Matching System Project: Projects</title>
     </head>
 
-    <body>
+        {% block title %}  <title>Matching System Project: Projects</title> {% endblock %}
+        {% block body_block %}
+
         <h1>Add a Project</h1>
 
         <form id="project_form" method="post" action="/projects/add_project/">
@@ -22,6 +24,4 @@
 
             <input type="submit" name="submit" value="Create Project" />
         </form>
-    </body>
-
-</html>
+        {% endblock %}

@@ -75,6 +75,7 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     first_name= forms.CharField
     last_name=forms.CharField
+    is_staff=0
     class Meta:
         model = User
         fields = ('username','first_name','last_name', 'email', 'password')

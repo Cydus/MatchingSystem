@@ -1,47 +1,51 @@
-<!DOCTYPE html>
+{% extends 'matching_system_project/base.html' %}
 
-{% load static %} <!-- New line -->
-<html>
+{% load static %}
 
-<head>
-  <title>Matching System</title>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-</head>
 
-<body>
-<div id="header">
-  <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
-</div>
-<h1>{{ projectName }}</h1>
-<h3>{{ description }}</h3>
+<!--<head>-->
+  <!--<title>Matching System</title>-->
+    <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
+<!--</head>-->
 
-{% if position_list %}
-  <h2>Open Positions</h2>
-  <ul>
-    {% for position in position_list %}
-       {% if projectName == position.projectID.projectName %}
-          {% if position.isOpen %}
 
-      <hr>
-      <p>
-          {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
 
-          {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
+{% block title %}  <title>Matching System Project: Projects</title> {% endblock %}
+{% block body_block %}
 
-      </p>
-      <p>
-          {{position.description}}
-      </p>
-      <br/>
-      <a href="{{position.projectID}}">Apply</a>
-      <hr>
-            {% endif %}
-       {% endif %}
-    {% endfor %}
-  </ul>
-{% else %}
-  <strong>No open positions for this project.</strong>
-{% endif %}
+            <div id="header">
+            <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
+            </div>
+            <h1>{{ projectName }}</h1>
+            <h3>{{ description }}</h3>
+
+            {% if position_list %}
+            <h2>Open Positions</h2>
+                 <ul>
+                    {% for position in position_list %}
+                        {% if projectName == position.projectID.projectName %}
+                            {% if position.isOpen %}
+
+                        <hr>
+                        <p>
+                            {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
+
+                            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
+
+                        </p>
+                        <p>
+                            {{position.description}}
+                        </p>
+                        <br/>
+                            <a href="{{position.projectID}}">Apply</a>
+                        <hr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                 </ul>
+            {% else %}
+            <strong>No open positions for this project.</strong>
+        {% endif %}
 
 
 {% if position_list %}
@@ -71,9 +75,7 @@
   <strong>No open positions for this project.</strong>
 {% endif %}
 
+<!--<a href="/admin/">ADMIN LOGIN</a><br />-->
 
 
-<a href="/admin/">ADMIN LOGIN</a><br />
-</body>
-
-</html>
+{% endblock %}
