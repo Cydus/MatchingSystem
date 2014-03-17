@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.models import User
 from models import Project, Position, Application
 
+from matching_system_project.models import UserProfile
+from django.contrib.auth.models import User
+
 
 class ProjectForm(forms.ModelForm):
     projectName = forms.CharField(max_length=128, help_text="Enter a project name")
@@ -62,15 +65,17 @@ class PositionForm(forms.ModelForm):
 
 
 
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    first_name= forms.CharField
+    last_name=forms.CharField
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name', 'email', 'password')
 
-
-
-# class ApplicationForm(forms.ModelForm):
-#     dateTimeCreated = forms.DateField()
-#     accepted = forms.BooleanField()
-#     seenByPM = forms.BooleanField()
-#
-#     class Meta:
-#         model = Application
+class UserProfileForm(forms.ModelForm):
+     class Meta:
+        model = UserProfile
+        fields = ('dob',)
 
 

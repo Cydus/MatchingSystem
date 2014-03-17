@@ -13,6 +13,10 @@ urlpatterns = patterns('',
     url(r'^projects/add_project/$', views.add_project, name='add_project'), # alina forms
     url(r'^projects/add_position/$', views.add_position, name='add_position'), # alina forms
     url(r'^projects/(?P<project_name_url>\w+)/$', views.project, name='project'),  # New!
+    url(r'^register/$', views.register, name='register'), # ADD NEW PATTERN!
+
+
+
 )
 #
 # if settings.DEBUG:

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Project(models.Model):
@@ -101,3 +102,15 @@ def update_position(sender, instance, created, **kwargs):
 
 signals.post_save.connect(update_position, sender=Application)
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+
+
+    dob = models.DateField()
+    # posit = models.URLField(blank=True)
+
+
+    # picture = models.ImageField(upload_to='profile_images', blank=True)
+    # Override the __unicode__() method to return out something meaningful!
+    def __unicode__(self):
+        return self.user.username
