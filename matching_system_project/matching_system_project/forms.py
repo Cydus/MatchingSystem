@@ -27,7 +27,7 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
 
-        fields = ('projectName', 'description', 'created', 'starts', 'expires', 'active', 'url')
+        # fields = ('projectName', 'description', 'created', 'starts', 'expires', 'active', 'url')
 
 def __init__(self, *args, **kwargs):
             self._user = kwargs.pop('user')
@@ -83,6 +83,8 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
      class Meta:
         model = UserProfile
+
+
         # fields = ('dob',)
 
 

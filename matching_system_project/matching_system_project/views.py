@@ -11,6 +11,8 @@ from matching_system_project.forms import ProjectForm, PositionForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import logout
+from models import Application
+from django.contrib.auth.models import User
 
 
 from django.http import HttpResponse
@@ -32,20 +34,11 @@ def projects(request):
     return HttpResponse("PROJECTS IN YOUR FACE MOFO")
 
 def project(request, project_name_url):
-
-    # Request our context from the request passed to us.
     context = RequestContext(request)
-
-    # Change underscores in the project title to spaces.
-    # URLs don't handle spaces well, so we encode them as underscores.
-    # We can then simply replace the underscores with spaces again to get the title.
     project_name = project_name_url.replace('_', ' ' )
 
     project = Project.objects.get(url=project_name_url)
 
-    # Change underscores in the project title to spaces.
-    # URLs don't handle spaces well, so we encode them as underscores.
-    # We can then simply replace the underscores with spaces again to get the title.
     project_name = project_name_url.replace('_', ' ' )
 
     # position lis
@@ -55,8 +48,6 @@ def project(request, project_name_url):
 
     position_dict ={'positions':position_list}
 
-    # Create a context dictionary which we can pass to the template rendering engine.
-    # We start by containing the title of the project passed by the user.
     context_dict = {'project_name': project_name}
     context_dict = {
         'projectName': project.projectName,
@@ -66,20 +57,7 @@ def project(request, project_name_url):
     }
 
     try:
-        # Can we find a project with the given title?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
 
-        #print project
-
-        # Retrieve all of the associated pages.
-        # Note that filter returns >= 1 model instance.
-        #positions = Position.objects.filter(project=project)
-
-        # Adds our results list to the template context under title pages.
-        #context_dict['positions'] = positions
-        # We also add the project object from the database to the context dictionary.
-        # We'll use this in the template to verify that the project exists.
         context_dict['project'] = project
     except Project.DoesNotExist:
         # We get here if we didn't find the specified project.
@@ -97,6 +75,7 @@ def add_project(request):
 
         # this is returning an error when we add a new project so I commented it
         # form = ProjectForm(request.POST, user=request.user)
+
         form = ProjectForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
@@ -121,8 +100,6 @@ def add_position(request):
             print form.errors
     else:
         form = PositionForm()
-
-
     return render_to_response('matching_system_project/add_position.html', {'form': form}, context)
 
 def register(request):
@@ -187,3 +164,21 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def applist(request):
+
+    context = RequestContext(request)
+    proj_list=Project.objects.all()
+    pos_list=Position.objects.all()
+    app_list =Application.objects.all()
+    us_list=User.objects.all()
+
+
+    context_dict={
+     'projects':proj_list,
+     'positions':pos_list,
+     'applications':app_list,
+     #'users':us_list,
+                }
+    return render_to_response('matching_system_project/applist.html', context_dict, context)

@@ -9,6 +9,7 @@
 
         {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }}!</h1>
+        <a href="/applist/"> Applications  </a>
         {% else %}
         <h1>You are not registered yet</h1>
         {% endif %}
@@ -39,6 +40,7 @@
         {% else %}
         <strong>There are no projects present.</strong>
         {% endif %}
+
     {% endblock  %}
 
 
