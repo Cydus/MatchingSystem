@@ -2,9 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-
 class Project(models.Model):
+    fk_CreatedBy = models.ForeignKey(User, null=True, blank=True)
     projectName = models.CharField(max_length=128, unique=True)
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
@@ -19,10 +18,18 @@ class Project(models.Model):
     #     super(Project, self).save()
     #
 
+    # def pre_save(self, request, extra_command="", *args, **kwargs):
+    #     print "hihihihi"
+    #     usr = request.user
+    #     self.fk_CreatedBy = usr
+
+    def post_save(self, request, extra_command="", *args, **kwargs):
+        print "I HATE DJANGO"
+        self.fk_CreatedBy = request.user
+        self.save()
+
     def __unicode__(self):
         return self.projectName.lower()
-
-
 
 class Position(models.Model):
     title = models.CharField(max_length=128)
@@ -49,11 +56,10 @@ class Application(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
+
+
     # url = models.CharField(max_length=128)
-
     # if (PositionID.isOpen == False):
-
-    from matching_system_project.models import Position
 
     print "----------------- SETTING " + "" + " TO FALSE -------------------"
 
@@ -100,17 +106,24 @@ class Application(models.Model):
 def update_position(sender, instance, created, **kwargs):
     instance.pre_save()
 
-signals.post_save.connect(update_position, sender=Application)
+    signals.post_save.connect(update_position, sender=Application)
 
+
+def create_project(request, sender, instance, created, **kwargs):
+    instance.post_save(request=request.user)
+
+# <<<<<<< HEAD
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
 
-    dob = models.DateField()
-    # posit = models.URLField(blank=True)
+    # dob = models.DateField()
 
-
-    # picture = models.ImageField(upload_to='profile_images', blank=True)
     # Override the __unicode__() method to return out something meaningful!
+
     def __unicode__(self):
         return self.user.username
+
+# =======
+#     signals.post_save.connect(create_project, sender=Project)
+# >>>>>>> 1597b0e55d31c2c831bf034b5d12789476d9ff24

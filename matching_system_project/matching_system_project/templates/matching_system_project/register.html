@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Matching System</title>
-    </head>
+{% extends 'matching_system_project/base.html' %}
 
-    <body>
-        <h1>Register with Matching System</h1>
+    <!--<head>-->
+        <!--<title>Matching System: Register</title>-->
+    <!--</head>-->
+
+         <h1>Register with Matching System</h1>
+
+        {% block title %}  <title>Matching System Project: Register</title> {% endblock %}
+        {% block body_block %}
 
         {% if registered %}
         Rango says: <strong>thank you for registering!</strong>
-        <a href="/index/">Return to the homepage.</a><br />
+        <a href="/">Return to the homepage.</a><br />
         {% else %}
-        Rango says: <strong>register here!</strong><br />
-
-            #maybe action is just /register
+        Please <strong>register here!</strong><br />
         <form id="user_form" method="post" action="/register/"
                 enctype="multipart/form-data">
 
             {% csrf_token %}
-
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
             {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-
-            <!-- Provide a button to click to submit the form. -->
+            <!--{{ profile_form.as_p }}-->
             <input type="submit" name="submit" value="Register" />
         </form>
         {% endif %}
-    </body>
-</html>
+        {% endblock %}

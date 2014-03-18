@@ -1,54 +1,54 @@
-<!DOCTYPE html>
+{% extends 'matching_system_project/base.html' %}
 
-{% load static %} <!-- New line -->
+    {% load static %}
+    {% block title %}   {% endblock %}
+    {% block body_block%}
 
-<html>
+        <h1>Matching Projects with Employees</h1>  <h3>Find the next project you want to work on!</h3>
+        <a href="/admin/">ADMIN LOGIN</a><br />
 
-<head>
-  <title>Matching System</title>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-</head>
+        {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username }}!</h1>
+        <a href="/applist/"> Applications  </a>
+        {% else %}
+        <h1>You are not registered yet</h1>
+        {% endif %}
 
-<body>
-<div id="header">
-  <img src="{% static "dog.jpg" %}" alt="Picture of Dog" />
-</div>
-<h1>Rango says...</h1>  <h3>Screw you guys I'm going home</h3>
-  <strong>{{ boldmessage }}</strong><br />
+            <strong>{{ boldmessage }}</strong><br />
 
-{% if positions %}
-  <ul>
-    {% for position in positions %}
-       {% if position.isOpen %}
+        {% if positions %}
+            <ul>
+                {% for position in positions %}
+                {% if position.isOpen %}
 
-      <hr>
-      <p>
-          {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
+            <hr>
+            <p>
+                {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
+                {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
 
-          {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
+            </p>
+            <a href=/projects/{{position.projectID.url}}>{{position.projectID.projectName}} </a>
+            <p>
+                {{position.description}}
+            </p>
+            <br/>
+            <a href="{{position.projectID}}">Apply</a>
+            <hr>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+        <strong>There are no projects present.</strong>
+        {% endif %}
 
-      </p>
-      <a href=/projects/{{position.projectID.url}}>{{position.projectID.projectName}} </a>
-      <p>
-          {{position.description}}
-      </p>
-      <br/>
-      <a href="{{position.projectID}}">Apply</a>
-      <hr>
-       {% endif %}
-    {% endfor %}
-  </ul>
-{% else %}
-  <strong>There are no projects present.</strong>
-{% endif %}
-
-
-<a href="/admin/">ADMIN LOGIN</a><br />
-<a href="/projects/add_project">Add a New Project</a>
-<a href="/projects/add_position/">Add a New Position</a>
-<a href="/register/">Register Here</a>
+    {% endblock  %}
 
 
-</body>
 
-</html>
+<!--<a href="/admin/">ADMIN LOGIN</a><br />-->
+<!--<a href="/projects/add_project">Add a New Project</a>-->
+<!--<a href="/projects/add_position/">Add a New Position</a>-->
+<!--<a href="/register/">Register Here</a>-->
+<!--<a href="/login/">Login</a>-->
+
+
