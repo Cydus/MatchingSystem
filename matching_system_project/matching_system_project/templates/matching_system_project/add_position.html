@@ -5,24 +5,27 @@
     <!--</head>-->
 
         {% block title %}  <title>Matching System Project: Projects</title> {% endblock %}
-        {% block body_block %}
 
+         {% block body_block %}
+        <div class="hero-unit">
         <h1>Add a Position</h1>
-
-        <form id="position_form" method="post" action="/projects/add_position/">
-
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
+        <br/>
+            <div class="container">
+                <form class="span6" id="position_form" method="post" action="/projects/add_position/">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
                 {{ hidden }}
-            {% endfor %}
+                {% endfor %}
 
-            {% for field in form.visible_fields %}
+                {% for field in form.visible_fields %}
                 {{ field.errors }}
-                {{ field.help_text}}
+                {{ field.help_text }}<br/>
                 {{ field }}
-            {% endfor %}
+                {% endfor %}
 
-            <input type="submit" name="submit" value="Create Position" />
-        </form>
-    {% endblock %}
-
+                <br/>
+                    <button class="btn btn-primary" type="submit" name="submit">Create Position</button>
+                </form>
+            </div>
+        </div>
+        {% endblock %}

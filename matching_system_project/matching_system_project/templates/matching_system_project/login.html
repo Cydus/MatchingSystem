@@ -1,24 +1,33 @@
 {% extends 'matching_system_project/base.html' %}
 
-
-    <!--<head>-->
-        <!--<title>Login for Matching System Project</title>-->
-    <!--</head>-->
-
-
         <h1>Login to Matching System</h1>
 
-        {% block title %}  <title>Matching System Project: Login</title> {% endblock %}
+        {% block title %}
+            <title>Matching System Project: Login</title>
+        {% endblock %}
+
         {% block body_block %}
+            <div class="hero-unit">
+            <h1>Login to Matching System</h1>
 
-        <form id="login_form" method="post" action="/login/">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+                <div class="container">
+                <form class="form-signin span4" id="login_form" method="post" action="/login/">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    {% csrf_token %}
 
-            <input type="submit" value="submit" />
-        </form>
+                    {% if bad_details %}
+                    <p><strong>Your username and/or password were incorrect!</strong></p>
+                    {% elif disabled_account %}
+                    <p><strong>Your account is currently disabled; we can't log you in!</strong></p>
+                    {% endif %}
 
+                    Username: <input type="text" class="input-block-level" placeholder="Username" name="username" value="" size="50" />
+                    <br />
+                    Password: <input type="password" class="input-block-level" placeholder="Password" name="password" value="" size="50" />
+                    <br />
+                    <button class="btn btn-primary" type="submit">Sign in</button>
+                </form>
+
+                </div>
+<           /div>
         {% endblock %}
