@@ -72,10 +72,14 @@ class PositionForm(forms.ModelForm):
         model = Position
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
+    email = forms.CharField(help_text="Please enter your email.")
+    username = forms.CharField(help_text="Please enter a username.")
+
     first_name= forms.CharField
     last_name=forms.CharField
     is_staff=0
+
     class Meta:
         model = User
         fields = ('username','first_name','last_name', 'email', 'password')
@@ -85,11 +89,19 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
 
 
-        # fields = ('dob',)
+# class UserForm(forms.ModelForm):
+    # username = forms.CharField(help_text="Please enter a username.")
+    # email = forms.CharField(help_text="Please enter your email.")
+    # password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
+    #
+    # class Meta:
+    #     model = User
+    #     fields = ['username', 'email', 'password']
 
-
-
-# class Application(forms.ModelForm):
-#      class Meta:
-#        model=Appliation
-
+# class UserProfileForm(forms.ModelForm):
+#     website = forms.URLField(help_text="Please enter your website.", required=False)
+#     picture = forms.ImageField(help_text="Select a profile image to upload.", required=False)
+#
+#     class Meta:
+#         model = UserProfile
+#         fields = ['website', 'picture']
