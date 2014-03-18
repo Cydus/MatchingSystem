@@ -88,3 +88,8 @@ class UserProfileForm(forms.ModelForm):
         # fields = ('dob',)
 
 
+
+# class Application(forms.ModelForm):
+#      class Meta:
+#        model=Appliation
+

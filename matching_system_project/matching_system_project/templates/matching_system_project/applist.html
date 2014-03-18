@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'matching_system_project/base.html' %}
 
     {% load static %}
@@ -14,28 +13,14 @@
         <h1>You are not registered yet</h1>
         {% endif %}
 
-        <form id="position_form" method="post" action="/applist/">
 
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text}}
-                {{ field }}
-            {% endfor %}
-
-            <!--<input type="checkbox" name="isOk" value="1">-->
-        </form>
 
 
 
 
         {% if  projects %}
           {% for project in projects %}
-              {{project.description}}
+
              {% if project.fk_CreatedBy == user %}
                 {% for position in positions %}
                   {% if position.projectID == project %}
@@ -53,51 +38,48 @@
           {% endfor %}
         {% endif %}
 
-
-
-
-
-
-
-    {% endblock  %}
-
-
-
-
-=======
-{% load static %}
-{% block title %}   {% endblock %}
-{% block body_block%}
-
-    <h1>Matching Projects with Employees</h1>  <h3>Find the next project you want to work on!</h3>
-    <a href="/admin/">ADMIN LOGIN</a><br />
-
-    {% if user.is_authenticated %}
-    <h1>Welcome {{ user.username }}!</h1>
-    {% else %}
-    <h1>You are not registered yet</h1>
-    {% endif %}
-
-    {% if  projects %}
-       {% for project in projects %}
-
-             {% if project.fk_CreatedBy == user %}
-               <p> {{project.projectName}} </p>
-             {% for position in positions %}
-              {% if position.projectID == project %}
-               <p>{{position}}</p>
-               {% for application in applications %}
-                  {% if application.PositionID == position %}
-                   {{application.UserID}} <br/>
-                   {{application.PositionID}} <br/>
-                   {{application.dateTimeCreated}}
+      {% if  projects %}
+          {% for project in projects %}
+                {% for position in positions %}
+                  {% if position.projectID == project %}
+                   {% for application in applications %}
+                      {% if application.PositionID == position %}
+                       {% if application.UserID == user %}
+                       <p>{{application.UserID}} </p>
+                       <p>{{application.PositionID}} <p/>
+                       <p>{{application.dateTimeCreated}}<p/>
+                       <p>
+                           {% if application.accepted %}
+                              <p><b>Success</b></p>
+                           {% else %}
+                              <p><b>Not accepted yet</b></p>
+                           {% endif %}
+                       </p>
+                       <p>
+                           {% if application.seenByPM %}
+                           <p><b> Application has been seen by PM</b></p>
+                            {% else %}
+                            <p><b>Application was not seen by PM</b></p>
+                           {% endif %}
+                       </p>
+                       {% endif %}
+                      {% endif %}
+                   {% endfor %}
                   {% endif %}
-               {% endfor %}
-              {% endif %}
-            {% endfor %}
-         {% endif%}
-      {% endfor %}
-    {% endif %}
+                {% endfor %}
 
-{% endblock  %}
->>>>>>> 22933977307ad41c75aa26f9f15b89557fce93a7
+          {% endfor %}
+        {% endif %}
+
+
+
+
+
+
+
+
+  {% endblock  %}
+
+
+
+

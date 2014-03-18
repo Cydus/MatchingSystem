@@ -112,7 +112,7 @@ def update_position(sender, instance, created, **kwargs):
 def create_project(request, sender, instance, created, **kwargs):
     instance.post_save(request=request.user)
 
-# <<<<<<< HEAD
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
@@ -124,6 +124,14 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
-# =======
-#     signals.post_save.connect(create_project, sender=Project)
-# >>>>>>> 1597b0e55d31c2c831bf034b5d12789476d9ff24
+# class UserProfile(models.Model):
+#     # This line is required. Links UserProfile to a User model instance.
+#     user = models.OneToOneField(User)
+#
+#     # The additional attributes we wish to include.
+#     website = models.URLField(blank=True)
+#     picture = models.ImageField(upload_to='profile_images', blank=True)
+#
+#     # Override the __unicode__() method to return out something meaningful!
+#     def __unicode__(self):
+#         return self.user.username
