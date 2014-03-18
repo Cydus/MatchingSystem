@@ -4,10 +4,10 @@ from django.shortcuts import render_to_response
 from models import Project
 from models import Position
 
-from matching_system_project.forms import UserForm, UserProfileForm
+from forms import UserForm, UserProfileForm
 
 
-from matching_system_project.forms import ProjectForm, PositionForm
+from forms import ProjectForm, PositionForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import logout

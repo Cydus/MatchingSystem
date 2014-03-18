@@ -2,7 +2,6 @@ import os
 import datetime
 import time
 
-
 def populate():
 
     add_Group(name="Applicant")
@@ -216,7 +215,7 @@ def add_position(url, title, projectID, description, dateTimeCreated, dateTimeSt
     return p
 
 def add_user(username, email, firstname, lastname, password, is_staff):
-    u = User.objects.get_or_create(username=username, email=email, first_name=firstname, last_name=lastname, password=password, is_staff = is_staff)
+    u = User.objects.get_or_create(username=username, email=email, first_name=firstname, last_name=lastname, password=password, is_staff=is_staff)
     return u
 
 def add_project(fk_CreatedBy, projectName, description, created, starts, expires, active, url):
