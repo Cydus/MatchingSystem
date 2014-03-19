@@ -182,3 +182,23 @@ def applist(request):
      #'users':us_list,
                 }
     return render_to_response('matching_system_project/applist.html', context_dict, context)
+
+def apply(request,user):
+
+    print "he applied!!!!!"
+    # print user
+
+    # feed=Feed.objects.get(pk=feedno)
+    # t=request.META['REMOTE_ADDR']
+    # feed.add_vote(t,+1)
+    # vote, created = Vote.objects.get_or_create(
+    #
+    #     feed=feed,
+    #     ip=t,
+    #     )
+    #
+    # feed.likecount+=1
+    # feed.save()
+    if 'HTTP_REFERER' in request.META:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpResponseRedirect('/')
