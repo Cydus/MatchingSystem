@@ -2,7 +2,7 @@
 
     {% load static %}
     {% block title %}   {% endblock %}
-    {% block body_block %}
+   {% block body_block %}
 
       <div class="alert alert-info ">
         <h1>Manage Applicants for your Projects</h1>
@@ -16,28 +16,28 @@
         {% if projects %}
           {% for project in projects %}
              {% if project.fk_CreatedBy == user %}
-               <h4>{{ project.projectName }}</h4>
-               <hr>
-
-
-
+{#               <h4>{{ project.projectName }}</h4>#}
+{#               <hr>#}
+{##}
+{##}
+{##}
                 {% for position in positions %}
                   {% if position.projectID == project %}
                     <h4>{{ position.title }} Applicants</h4>
-                   {% for application in applications %}
-                      {% if application.PositionID == position %}
-                       <span>{{application.UserID}} </span>
-{#                       {{application.PositionID}} #}
-                       </span>
-                       {{application.dateTimeCreated}}
+{#                   {% for application in applications %}#}
+{#                      {% if application.PositionID == position %}#}
+{#                       <span>{{application.UserID}} </span>#}
+{#                       {{application.PositionID}}#}
+{#                       </span>#}
+{#                       {{application.dateTimeCreated}}#}
 
                       {% endif %}
                    {% endfor %}
                   {% endif %}
                 {% endfor %}
              {% endif%}
-          {% endfor %}
-        {% endif %}
+{#          {% endfor %}#}
+{#        {% endif %}#}
 
       {% if  projects %}
           {% for project in projects %}
