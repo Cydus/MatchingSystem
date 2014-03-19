@@ -99,6 +99,68 @@ def populate():
                 expires="2014-08-15",
                 active=True,
                 url = "information_retrieval_research_group",)
+    machineLearning = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Machine Learning Research Group",
+                description="The company is forming a group to research ML clustering algorithms. Let's create something awesome!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "machine_learning_research_group",)
+    artificcialIntelligence = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Artificial Intelligence Research Group",
+                description="The company is forming a group to research neural networks. Let's build something awesome!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "artificial_intelligence_research_group",)
+
+    bigData = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Big Data Research Group",
+                description="The company is forming a group to research large amounts of  data. ",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "big_data_research_group",)
+
+    computerGraphics = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Computer Graphics Research Group",
+                description="The company is forming a group to research and create game engine  . Let's build something awesome!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "computer_graphics_research_group",)
+
+
+    parallelComputation = add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Parallel Computation Research Group",
+                description="The company is forming a group to research and develop more efficient parallelized systems. Let's build something awesome!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "paralel_computation_research_group",)
+
+
+    nuclearReactorSystem= add_project(
+                fk_CreatedBy=User.objects.get(username='SarahJ'),
+                projectName="Nuclear Reactor Software",
+                description="The company is forming a group to create nuclear reactor software system  . Be careful with bugs!",
+                created="2014-03-02",
+                starts="2014-03-25",
+                expires="2014-08-15",
+                active=True,
+                url = "nuclear_reactor_system",)
+
+
 
 #     add_project(name="Cow Milking Robot 3.0",
 #                 description="The last cow milking robots were a huge disaster. University 2.0 must harness its bovine talent to suceed at this goal.",
@@ -106,7 +168,7 @@ def populate():
 #                 starts="2014-05-15",
 #                 expires="2014-09-15",
 #                 active=True,)
-#
+#     project and positions
 #     add_project(name="Rector election app",
 #                 description="Our students are lazy shits and don't vote enough for new Rectors. We are building a mobile app to get them involved.",
 #                 created="2014-03-25",
@@ -177,6 +239,51 @@ def populate():
                  dateTimeExpires="2015-10-15",
                  isOpen=False,
                  url="security_specialist",)
+
+    webTester = add_position(title="Web Tester",
+                 projectID= informationRetrieval,
+                 description="Testing and trying to crash web pages, sites or applications. Finding bugs.",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,
+                 url="web_tester")
+
+    systemAnalyst = add_position(title="System Analyst",
+                 projectID=machineLearning,
+                 description="Ability to analyse situation and give reasonalbe solution",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,
+                 url="system_analyst")
+
+    dbAdministator = add_position(title="DB Administrator",
+                 projectID=artificcialIntelligence,
+                 description="Creating , updating and supporting existing DB infrastructure",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,
+                 url="db_administrator")
+
+    systemArchitect = add_position(title="System Architect",
+                 projectID= bigData,
+                 description="Designing system for solution of company's problems",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,
+                 url="system_architect")
+
+    systemAdministrator =add_position(title="System Administrator",
+                 projectID= infrastructure,
+                 description="Supporting and maintaing  company's existing servers",
+                 dateTimeCreated="2014-03-20",
+                 dateTimeStarts="2014-05-15",
+                 dateTimeExpires="2015-02-10",
+                 isOpen=True,
+                 url="system_administrator")
 
     # Applications
 
