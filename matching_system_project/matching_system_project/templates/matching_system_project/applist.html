@@ -4,13 +4,11 @@
     {% block title %}   {% endblock %}
     {% block body_block %}
 
-        <h1>Matching Projects with Employees</h1>  <h3>Find the next project you want to work on!</h3>
-        <a href="/admin/">ADMIN LOGIN</a><br />
+        <h1>Manage Applicants for your Projects</h1>
 
-        {% if user.is_authenticated %}
-        <h1>Welcome {{ user.username }}!</h1>
+        {% if user.is_staff == 1%}
         {% else %}
-        <h1>You are not registered yet</h1>
+        <h1>Only Managers can access this page</h1>
         {% endif %}
 
         {% if projects %}
@@ -18,6 +16,9 @@
              {% if project.fk_CreatedBy == user %}
                <h3>{{ project.projectName }}</h3>
                <hr>
+
+
+
                 {% for position in positions %}
                   {% if position.projectID == project %}
                     <h4>{{ position.title }} Applicants</h4>
