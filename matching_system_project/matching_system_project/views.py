@@ -235,3 +235,28 @@ def apply(request, uid, posid):
     if 'HTTP_REFERER' in request.META:
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     return HttpResponseRedirect('/')
+
+
+
+
+
+def accept(request,appid):
+
+    app= Application.objects.get(pk=appid)
+
+    if Application.objects.get(pk=appid).accepted != True:
+       Application.objects.set(seenByPm=True )
+       Application.objects.set(accepted=True )
+     #  Application.objects.get(pk=appid).accepted=True
+      # Application.objects.get(pk=appid).seenByPm=True
+      # Application.objects.get(pk=appid).save()
+       print Application.objects.get(pk=appid).PositionID
+    else:
+        print "you can accept person only once"
+   # Application.objects.set
+
+    if 'HTTP_REFERER' in request.META:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpResponseRedirect('/')
+
+
