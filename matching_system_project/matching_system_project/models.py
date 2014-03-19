@@ -35,13 +35,13 @@ class Position(models.Model):
     title = models.CharField(max_length=128)
     projectID = models.ForeignKey('Project')
     description = models.TextField(max_length=999)
-    dateTimeCreated = models.DateField(auto_now_add=True)
+    dateTimeCreated = models.DateField(auto_now_add=True, editable=False)
     dateTimeStarts = models.DateField(verbose_name="Start Date")
     dateTimeExpires = models.DateField(verbose_name="End Date")
     url = models.URLField(max_length=256)
 
-    fk_ApplicantID = models.ForeignKey(User, null=True, blank=True)
-    isOpen = models.BooleanField(default=True)
+    fk_ApplicantID = models.ForeignKey(User, null=True, blank=True, editable=False)
+    isOpen = models.BooleanField(default=True, editable=False)
 
     def __unicode__(self):
         return self.title.lower()

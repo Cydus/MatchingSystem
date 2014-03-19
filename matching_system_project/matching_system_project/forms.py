@@ -49,13 +49,13 @@ class PositionForm(forms.ModelForm):
     from models import Project
 
     title = forms.CharField(max_length=128, help_text="Enter a position name")
-    projectID = forms.ModelChoiceField(queryset=Project.objects.all())
+    projectID = forms.ModelChoiceField(queryset=Project.objects.all(),help_text="Select Project")
     description = forms.CharField(max_length=999, help_text="Describe the position")
     dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
     dateTimeStarts = forms.DateField(help_text="Enter the date when the position will start")
     dateTimeExpires = forms.DateField(help_text="Enter the date when the position will expire")
-    url = forms.URLField(max_length=256, help_text="Enter the URL")
-    isOpen = forms.BooleanField(help_text="Tick the box if the position is open")
+    url = forms.URLField(max_length=256, help_text="Enter the URL", )
+    # isOpen = forms.BooleanField(help_text="Tick the box if the position is open")
 
 
     def clean(self):

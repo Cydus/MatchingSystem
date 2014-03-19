@@ -1,3 +1,7 @@
+#position_form #id_fk_ApplicantID {
+  /*display: none;*/
+}
+
 .twocollum {
   /*-webkit-column-count:2; *//* Chrome, Safari, Opera */
   /*-moz-column-count:2; *//* Firefox */
