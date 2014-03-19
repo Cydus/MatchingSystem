@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class ProjectForm(forms.ModelForm):
     projectName = forms.CharField(max_length=128, help_text="Enter a project name")
     description = forms.CharField(max_length=999, help_text="Describe the project")
-    created = forms.DateField(help_text="Enter the date for creating this project")
+    # created = forms.DateField(help_text="Enter the date for creating this project")
     starts = forms.DateField(help_text="Enter the start day for the project")
     expires = forms.DateField(help_text="Enter the expiration date")
     active = forms.BooleanField(help_text="Is this project active yet?")
