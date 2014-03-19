@@ -204,11 +204,12 @@ def apply(request, uid, posid):
     # connection.close()
 
     print "he applied!!!!!"
-    print uid
-    print posid
+
 
     pos = Position.objects.get(pk=posid)
     posuid = User.objects.get(pk=uid)
+
+    print "position: " + pos.title + " applied for by: " + posuid.username
 
     existingApplications = len(Application.objects.filter(UserID = posuid, PositionID = pos))
     print existingApplications
@@ -264,6 +265,7 @@ def accept(request,appid):
 
         pos = Position.objects.get(pk=app.PositionID.id)
         pos.isOpen = False
+        pos.fk_ApplicantID = app.UserID
         pos.save()
 
 

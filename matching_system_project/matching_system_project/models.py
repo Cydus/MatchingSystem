@@ -57,11 +57,12 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
 
-
     # url = models.CharField(max_length=128)
     # if (PositionID.isOpen == False):
 
     print "----------------- SETTING " + "" + " TO FALSE -------------------"
+
+
 
     # if Position.objects.get(title="Web Developer").isOpen:
     #     print "HALOOOOOOOOOOOOOOOOOOOOO"
@@ -82,6 +83,7 @@ class Application(models.Model):
         print pos.isOpen
 
         pos.fk_ApplicantID = self.UserID
+        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
         pos.save()
 
 
@@ -104,7 +106,7 @@ class Application(models.Model):
 
 
 def update_position(sender, instance, created, **kwargs):
-    instance.pre_save()
+    instance.post_save()
 
     signals.post_save.connect(update_position, sender=Application)
 
