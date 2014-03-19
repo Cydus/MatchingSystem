@@ -31,7 +31,9 @@
                 <span class="span6 text-right text-info">{{position.dateTimeStarts}}  - {{position.dateTimeExpires}}</span>
 
             </p>
+
             <a href=/projects/{{position.projectID.url}}>{{position.projectID.projectName}} </a>
+
             <p>
                 {{position.description}}
             </p>
@@ -48,8 +50,9 @@
 {#                    dsfasfd#}
 {#                    {% endif %}#}
 {#                  {% endfor %}#}
+                  {% if user.is_authenticated  %}
               <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply Now</a>
-
+                  {% endif %}
                 {% endif %}
                 {% endfor %}
         {% else %}
