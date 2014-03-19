@@ -13,14 +13,14 @@ class ProjectForm(forms.ModelForm):
     starts = forms.DateField(help_text="Enter the start day for the project")
     expires = forms.DateField(help_text="Enter the expiration date")
     active = forms.BooleanField(help_text="Is this project active yet?")
-    url = forms.URLField(max_length=256, help_text="Enter the URL")
+    url = forms.CharField(max_length=256, help_text="Enter the URL")
 
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
-        if url and not url.startswith('http://'):
-            url = 'http://' + url
-            cleaned_data['url'] = url
+        # if url and not url.startswith('http://'):
+        # url = 'http://' + url
+        cleaned_data['url'] = url
 
         return cleaned_data
 
@@ -54,7 +54,7 @@ class PositionForm(forms.ModelForm):
     dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
     dateTimeStarts = forms.DateField(help_text="Enter the date when the position will start")
     dateTimeExpires = forms.DateField(help_text="Enter the date when the position will expire")
-    url = forms.URLField(max_length=256, help_text="Enter the URL", )
+    url = forms.CharField(max_length=256, help_text="Enter the URL", )
     # isOpen = forms.BooleanField(help_text="Tick the box if the position is open")
 
 
@@ -62,9 +62,9 @@ class PositionForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
 
-        if url and not url.startswith('http://'):
-            url = 'http://' + url
-            cleaned_data['url'] = url
+        # if url and not url.startswith('http://'):
+        #     url = 'http://' + url
+        cleaned_data['url'] = url
 
         return cleaned_data
 
@@ -99,7 +99,7 @@ class UserProfileForm(forms.ModelForm):
     #     fields = ['username', 'email', 'password']
 
 # class UserProfileForm(forms.ModelForm):
-#     website = forms.URLField(help_text="Please enter your website.", required=False)
+#     website = forms.CharField(help_text="Please enter your website.", required=False)
 #     picture = forms.ImageField(help_text="Select a profile image to upload.", required=False)
 #
 #     class Meta:

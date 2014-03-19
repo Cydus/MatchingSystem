@@ -10,7 +10,7 @@ class Project(models.Model):
     starts = models.DateField(verbose_name="Start Date")
     expires = models.DateField(verbose_name="End Date")
     active = models.BooleanField(default=True)
-    url = models.URLField(max_length=256)
+    url = models.CharField(max_length=256)
     #
     # def save(self):
     #     if not self.url:
@@ -38,7 +38,7 @@ class Position(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True, editable=False)
     dateTimeStarts = models.DateField(verbose_name="Start Date")
     dateTimeExpires = models.DateField(verbose_name="End Date")
-    url = models.URLField(max_length=256)
+    url = models.CharField(max_length=256)
 
     fk_ApplicantID = models.ForeignKey(User, null=True, blank=True, editable=False)
     isOpen = models.BooleanField(default=True, editable=False)
@@ -131,7 +131,7 @@ class UserProfile(models.Model):
 #     user = models.OneToOneField(User)
 #
 #     # The additional attributes we wish to include.
-#     website = models.URLField(blank=True)
+#     website = models.CharField(blank=True)
 #     picture = models.ImageField(upload_to='profile_images', blank=True)
 #
 #     # Override the __unicode__() method to return out something meaningful!
