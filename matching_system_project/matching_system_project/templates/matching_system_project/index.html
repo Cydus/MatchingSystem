@@ -11,6 +11,43 @@
 
       </div>
 
+      <form id="live-search" action="" class="styled" method="post">
+        <fieldset>
+          <input type="text" class="text-input" id="filter" value="" />
+          <span id="filter-count"></span>
+        </fieldset>
+      </form>
+
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $("#filter").keyup(function(){
+
+            // Retrieve the input field text and reset the count to zero
+            var filter = $(this).val(), count = 0;
+
+            // Loop through the comment list
+            $(".position").each(function(){
+
+              // If the list item does not contain the text phrase fade it out
+              if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).fadeOut();
+
+                // Show the list item if the phrase matches and increase the count by 1
+              } else {
+                $(this).show();
+                count++;
+              }
+            });
+
+            // Update the count
+            var numberItems = count;
+            $("#filter-count").text("Found "+count+ " positions");
+          });
+        });
+
+      </script>
+
         {#{% if user.is_authenticated %}#}
         {#<a href="/applist/"> Applications  </a>#}
         {#{% else %}#}
@@ -23,11 +60,12 @@
                 {% for position in positions %}
                 {% if position.isOpen %}
 
-            <hr>
+
 
             <div class="position">
+              <hr>
             <p>
-                <h4><span class="span6 text-left ">{{position.title}}</span></h4>
+                <h4><span id="title" class="span6 text-left ">{{position.title}}</span></h4>
                 <span class="span6 text-right text-info">{{position.dateTimeStarts}}  - {{position.dateTimeExpires}}</span>
 
             </p>
@@ -39,20 +77,24 @@
             </p>
             <br/>
 
+              <a href="/projects/{{ position.projectID.url }}" class="btn">View Project</a>
+
+              {% if user.is_authenticated  %}
+                <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply Now</a>
+              {% endif %}
+
 
             </div>
 
 
 {#            <a href="{{ position.projectID}}">Apply</a>#}
-              <a href="/projects/{{ position.projectID.url }}" class="btn">View Project</a>
+
 {#                  {% for application in applications %}#}
 {#                   {% if application.PostionID.id == position.id %}#}
 {#                    dsfasfd#}
 {#                    {% endif %}#}
 {#                  {% endfor %}#}
-                  {% if user.is_authenticated  %}
-              <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply Now</a>
-                  {% endif %}
+
                 {% endif %}
                 {% endfor %}
         {% else %}
