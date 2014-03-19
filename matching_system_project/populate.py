@@ -285,7 +285,37 @@ def populate():
                  isOpen=True,
                  url="system_administrator")
 
+    softwareEngineer = add_position(title="Software Engineer",
+                                   projectID= intranet,
+                                   description="Designing system for solution of company's problems",
+                                   dateTimeCreated="2014-03-20",
+                                   dateTimeStarts="2014-05-15",
+                                   dateTimeExpires="2015-02-10",
+                                   isOpen=False,
+                                   url="network_architect")
+
+    netsystemadmin = add_position(title="Network System Administrator",
+                                      projectID= intranet,
+                                      description="Supporting and maintaing  company's existing servers",
+                                      dateTimeCreated="2014-03-20",
+                                      dateTimeStarts="2014-05-15",
+                                      dateTimeExpires="2015-02-10",
+                                      isOpen=True,
+                                      url="system_administrator22")
+
     # Applications
+
+    add_application(dateTimeCreated="2014-03-05",
+                    accepted=False,
+                    seenByPM=False,
+                    UserID=User.objects.get(username='Mike'),
+                    PositionID=netsystemadmin,)
+
+    add_application(dateTimeCreated="2014-03-08",
+                    accepted=True,
+                    seenByPM=True,
+                    UserID=User.objects.get(username='AJones49'),
+                    PositionID=softwareEngineer,)
 
     add_application(dateTimeCreated="2014-03-05",
                     accepted=False,

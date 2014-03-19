@@ -23,14 +23,14 @@
 
 @media (min-width: 980px) {
 .container-fluid {
-    margin-top: 60px;
+    /*margin-top: 60px;*/
 }
 }
 
 @media (min-width: 1200px) {
 
 .container-fluid {
-    margin-top: 60px;
+    /*margin-top: 60px;*/
 }
 }
 
