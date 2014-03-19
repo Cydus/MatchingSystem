@@ -22,16 +22,16 @@
 {##}
 {##}
                 {% for position in positions %}
-                  {% if position.projectID == project %}
-                    <h4>{{ position.title }} Applicants</h4>
+{#                  {% if position.projectID == project %}#}
+{#                    <h4>{{ position.title }} Applicants</h4>#}
 {#                   {% for application in applications %}#}
 {#                      {% if application.PositionID == position %}#}
 {#                       <span>{{application.UserID}} </span>#}
 {#                       {{application.PositionID}}#}
 {#                       </span>#}
 {#                       {{application.dateTimeCreated}}#}
-
-                      {% endif %}
+{##}
+{#                      {% endif %}#}
                    {% endfor %}
                   {% endif %}
                 {% endfor %}
