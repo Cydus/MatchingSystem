@@ -4,7 +4,9 @@
     {% block title %}   {% endblock %}
     {% block body_block %}
 
+      <div class="alert alert-info ">
         <h1>Manage Applicants for your Projects</h1>
+      </div>
 
         {% if user.is_staff == 1%}
         {% else %}
@@ -14,7 +16,7 @@
         {% if projects %}
           {% for project in projects %}
              {% if project.fk_CreatedBy == user %}
-               <h3>{{ project.projectName }}</h3>
+               <h4>{{ project.projectName }}</h3>
                <hr>
 
 
@@ -44,44 +46,29 @@
                    {% for application in applications %}
                       {% if application.PositionID == position %}
                        {% if application.accepted == False %}
-                       <p>{{application.UserID}} </p>
+                       <h2>{{application.UserID}} </h2>
 
-
-                    <input type="hidden" name="app_id" value="{{ application.id }}"/>
-
-                  <script type="text/javascript">
-
-                    $("a.accept").click(function(){
-                      var curr_elem = $(this) ;
-                      $.get($(this).attr('href'), function(data){
-                        var my_div = $(curr_elem).parent().find("b");
-                        my_div.text(my_div.text()*1+1);
-                      });
-
-   {#                $(this).addClass("accepted");#}
-
-                      return false; // prevent loading URL from href
-                    });
-                  </script>
-
-       <a href="/accept/{{ application.id }}" class="accept">Ajax Accept</a>
-
-                       <p>{{application.PositionID}} <p/>
-                       <p>{{application.dateTimeCreated}}<p/>
+                       <p>for <b>{{application.PositionID}}</b> in <a href="/projects/{{ project.url }}">{{project.projectName}}</a> - {{application.dateTimeCreated}}<p/>
+                       <p><p/>
                        <p>
+
+
+
+
                            {% if application.accepted %}
                               <p><b>Success</b></p>
                            {% else %}
-                              <p><b>Not accepted yet</b></p>
+                             <a class="btn" href="/accept/{{ application.id }}" class="accept">Accept Application</a>
                            {% endif %}
                        </p>
                        <p>
-                           {% if application.seenByPM %}
-                           <p><b> Application has been seen by PM</b></p>
-                            {% else %}
-                            <p><b>Application was not seen by PM</b></p>
-                           {% endif %}
+{#                           {% if application.seenByPM %}#}
+{#                           <p><b> Application has been seen by PM</b></p>#}
+{#                            {% else %}#}
+{#                            <p><b>Application was not seen by PM</b></p>#}
+{#                           {% endif %}#}
                        </p>
+                         <hr>
                        {% endif %}
                       {% endif %}
                    {% endfor %}
@@ -93,7 +80,26 @@
 
 
 
+      <input type="hidden" name="app_id" value="{{ application.id }}"/>
 
+      <script type="text/javascript">
+
+        $("a.accept").click(function(){
+
+          $(this).after('<div class="btn btn-success" style="width: 100px;">Accepted</div>')
+          $(this).remove();
+
+          var curr_elem = $(this) ;
+          $.get($(this).attr('href'), function(data){
+            var my_div = $(curr_elem).parent().find("b");
+            my_div.text(my_div.text()*1+1);
+          });
+
+          {#                $(this).addClass("accepted");#}
+
+          return false; // prevent loading URL from href
+        });
+      </script>
 
 
 
