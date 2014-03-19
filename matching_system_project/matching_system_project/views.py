@@ -255,16 +255,27 @@ def accept(request,appid):
 
     app= Application.objects.get(pk=appid)
 
-    if Application.objects.get(pk=appid).accepted != True:
-       Application.objects.set(seenByPm=True )
-       Application.objects.set(accepted=True )
+    if Application.objects.get(pk=appid).accepted == False:
+
+        app.accepted = True
+        app.seenByPM = True
+
+        app.save()
+
+        pos = Position.objects.get(pk=app.PositionID.id)
+        pos.isOpen = False
+        pos.save()
+
+
+       # Application.objects.set(seenByPm=True )
+       # Application.objects.set(accepted=True )
      #  Application.objects.get(pk=appid).accepted=True
       # Application.objects.get(pk=appid).seenByPm=True
       # Application.objects.get(pk=appid).save()
-       print Application.objects.get(pk=appid).PositionID
+
+        print Application.objects.get(pk=appid).PositionID
     else:
-        print "you can accept person only once"
-   # Application.objects.set
+        print "cannot accept application more than once"
 
     if 'HTTP_REFERER' in request.META:
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
