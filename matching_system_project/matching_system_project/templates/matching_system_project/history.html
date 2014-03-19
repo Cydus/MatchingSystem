@@ -1,0 +1,52 @@
+{% extends 'matching_system_project/base.html' %}
+
+    {% load static %}
+    {% block title %}   {% endblock %}
+    {% block body_block %}
+
+        <h1>Positions to which you have applied</h1>
+
+        {% if user.is_staff == 0 %}
+
+
+        {% if projects %}
+          {% for project in projects %}
+
+
+
+                {% for position in positions %}
+                  {% if position.projectID == project %}
+
+                   {% for application in applications %}
+                      {% if application.PositionID == position %}
+                         {% if application.UserID.id == user.id %}
+                           <hr>
+                             {{position.title}}
+                       <span>{{application.UserID}} </span>
+{#                       {{application.PositionID}} #}
+                       </span>
+                       {{application.dateTimeCreated}}
+
+                          {% endif %}
+                          {% endif %}
+                       {% endfor %}
+                  {% endif %}
+                {% endfor %}
+
+          {% endfor %}
+        {% endif %}
+
+
+
+     {% endif %}
+
+
+
+
+
+
+  {% endblock  %}
+
+
+
+
