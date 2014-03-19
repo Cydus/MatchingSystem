@@ -1,6 +1,6 @@
 {% extends 'matching_system_project/base.html' %}
 
-         <h1>Register with Matching System</h1>
+         <!--<h1>Register with Matching System</h1>-->
 
         {% block title %}  <title>Matching System Project: Register</title> {% endblock %}
 
@@ -14,7 +14,7 @@
             {% if registered %}
             <p>Thank you for registering.</p>
 
-            <p><a href="/login/">Login</a>to Matching System.</p>
+            <p><a href="/login/">Login </a>to Matching System.</p>
             {% else %}
             <form class="form-signin span8" id="user_form" method="post" action="/register/"
               enctype="multipart/form-data">

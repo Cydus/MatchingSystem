@@ -284,3 +284,19 @@ def accept(request,appid):
     return HttpResponseRedirect('/')
 
 
+def history(request):
+
+     context = RequestContext(request)
+     proj_list=Project.objects.all()
+     pos_list=Position.objects.all()
+     app_list =Application.objects.all()
+     us_list=User.objects.all()
+     context_dict={
+     'projects':proj_list,
+     'positions':pos_list,
+     'applications':app_list,
+                }
+
+
+     return render_to_response('matching_system_project/history.html',context_dict,context)
+
