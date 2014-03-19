@@ -29,7 +29,9 @@ def index(request):
         # print User.objects.get(request.POST['user_id'])
 
     position_list = Position.objects.all()
-    position_dict ={'positions':position_list}
+    app_lisr=Application.objects.all()
+
+    position_dict ={'positions':position_list,'applications':app_lisr}
     return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +

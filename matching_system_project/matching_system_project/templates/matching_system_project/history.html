@@ -20,12 +20,20 @@
                    {% for application in applications %}
                       {% if application.PositionID == position %}
                          {% if application.UserID.id == user.id %}
+
+                            <div class=""> <h3>{{position.title}}</h3></div>
+
+                           <p class="">Applied on: {{application.dateTimeCreated}}</p>
+
+                           {% if application.accepted == True %}
+                             <div class="alert-success alert">Sucessful</div>
+                             {% else %}
+                               <div class="alert-info alert">Pending</div>
+                             {% endif %}
                            <hr>
-                             {{position.title}}
-                       <span>{{application.UserID}} </span>
-{#                       {{application.PositionID}} #}
-                       </span>
-                       {{application.dateTimeCreated}}
+
+
+
 
                           {% endif %}
                           {% endif %}
