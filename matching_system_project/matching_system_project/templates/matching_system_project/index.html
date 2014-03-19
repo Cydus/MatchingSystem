@@ -22,6 +22,8 @@
                 {% if position.isOpen %}
 
             <hr>
+
+            <div class="position">
             <p>
                 {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
                 {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
@@ -33,6 +35,8 @@
             </p>
             <br/>
 
+                  <input type="hidden" name="profile_id" value="{{ user.id }}"/>
+
                   <script type="text/javascript">
 
                     $("a.apply").click(function(){
@@ -41,14 +45,18 @@
                         var my_div = $(curr_elem).parent().find("b");
                         my_div.text(my_div.text()*1+1);
                       });
+
+{#                      $(this).addClass("applied");#}
+
                       return false; // prevent loading URL from href
                     });
                   </script>
+            </div>
 
 
 {#            <a href="{{ position.projectID}}">Apply</a>#}
 
-              <a href="/apply/lololololo" class="apply">Ajax Apply</a>
+              <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply">Ajax Apply</a>
             <hr>
                 {% endif %}
                 {% endfor %}

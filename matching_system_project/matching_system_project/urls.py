@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^restricted/', views.restricted, name='restricted'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^applist/$', views.applist, name = 'applist'),
-    url(r'^apply/(\d+)/$',apply),
+    url(r'^apply/(?P<uid>[-\w]+)/(?P<posid>[-\w]+)/$', views.apply, name = 'apply'),
 
 
 

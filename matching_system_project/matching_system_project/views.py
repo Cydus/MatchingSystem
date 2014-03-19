@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from models import Project
-from models import Position
+from models import Project, Position, Application
+from django.db import models
 
 from forms import UserForm, UserProfileForm
 
@@ -22,7 +22,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 def index(request):
 
-    context = RequestContext(request)
+    context = RequestContext(request )
+
+    if request.method == 'POST':
+        print "hHihisdfisdfidsifd"
+        # print User.objects.get(request.POST['user_id'])
+
     position_list = Position.objects.all()
     position_dict ={'positions':position_list}
     return render_to_response('matching_system_project/index.html', position_dict, context)
@@ -168,6 +173,8 @@ def user_logout(request):
 
 def applist(request):
 
+    print "he applied!!!!!"
+
     context = RequestContext(request)
     proj_list=Project.objects.all()
     pos_list=Position.objects.all()
@@ -183,9 +190,35 @@ def applist(request):
                 }
     return render_to_response('matching_system_project/applist.html', context_dict, context)
 
-def apply(request,user):
+def apply(request, uid, posid):
 
     print "he applied!!!!!"
+    print uid
+    print posid
+
+    pos = Position.objects.get(pk=posid)
+    posuid = User.objects.get(pk=uid)
+
+    existingApplications = len(Application.objects.filter(UserID = posuid, PositionID = pos))
+    print existingApplications
+
+    # print posuid
+    # print pos.fk_ApplicantID
+
+    if existingApplications < 1:
+
+         Application.objects.create(
+            UserID = posuid,
+            PositionID = pos,
+            accepted = False,
+            seenByPM = False,)
+
+    else:
+
+         print "you cannot apply more than twice"
+
+
+
     # print user
 
     # feed=Feed.objects.get(pk=feedno)
