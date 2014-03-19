@@ -33,13 +33,15 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'davidb1985@gmail.com'
-EMAIL_HOST_PASSWORD = 'meemailaccess'
-# EMAIL_BACKEND = 'localhost'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # EMAIL_USE_TLS = True
+# # EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST = 'localhost'
+# # EMAIL_PORT = 587
+# EMAIL_PORT = 1025
+# EMAIL_HOST_USER = 'davidb1985@gmail.com'
+# EMAIL_HOST_PASSWORD = 'meemailaccess'
+# # EMAIL_BACKEND = 'localhost'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

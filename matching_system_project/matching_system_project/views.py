@@ -192,9 +192,16 @@ def applist(request):
 
 def apply(request, uid, posid):
 
-    from django.core.mail import EmailMessage
-    email = EmailMessage('Hello', 'World', to=['davidb1985@gmail.com'])
-    email.send()
+
+    # from django.core import mail
+    #
+    # connection = mail.get_connection()
+    #
+    # # email = EmailMessage('Hello', 'World', to=['davidb1985@gmail.com'])
+    # connection.send_mail('Subject', 'Message.', 'from@example.com',
+    #           ['john@example.com', 'jane@example.com'])
+    #
+    # connection.close()
 
     print "he applied!!!!!"
     print uid
