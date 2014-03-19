@@ -11,34 +11,29 @@
     {% load static %}
     {% block title %} <title>Matching System Project: Projects</title>  {% endblock %}
     {% block body_block%}
-
+      <div class="alert alert-info ">
             <h1>{{ projectName }}</h1>
-            <h3>{{ description }}</h3>
+      <span>{{ description }}</span></div>
 
             {% if position_list %}
-            <h2>Open Positions</h2>
-                 <ul>
+            <div class="alert-success alert"><h2>Open Positions</h2></div>
+
                     {% for position in position_list %}
                         {% if projectName == position.projectID.projectName %}
                             {% if position.isOpen %}
 
                         <hr>
-                        <p>
-                            {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
-
-                            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
-
-                        </p>
+                              <h4><span class="span6 text-left ">{{position.title}}</span></h4>
+                              <span class="span6 text-right text-info">{{position.dateTimeStarts}}  - {{position.dateTimeExpires}}</span>
                         <p>
                             {{position.description}}
                         </p>
                         <br/>
                             <a href="{{position.projectID}}">Apply</a>
-                        <hr>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
-                 </ul>
+
             {% else %}
             <strong>No open positions for this project.</strong>
         {% endif %}
@@ -49,13 +44,13 @@
   <ul>
     {% for position in position_list %}
       {% if projectName == position.projectID.projectName %}
-        {% if position.isOpen == False %}
+{#        {% if position.fk_ApplicantID == True %}#}
 
           <hr>
           <p>
             {{position.title}} &nbsp &nbsp  &nbsp  &nbsp
 
-            {{ position.fk_ApplicantID }}
+            {{ position.fk_ApplicantID}}
 
             {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}
 
@@ -63,7 +58,7 @@
           <br/>
 {#          <a href="{{position.projectID}}">Apply</a>#}
           <hr>
-        {% endif %}
+{#        {% endif %}#}
       {% endif %}
     {% endfor %}
   </ul>
