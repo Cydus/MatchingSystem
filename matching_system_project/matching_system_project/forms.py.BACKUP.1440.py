@@ -60,7 +60,11 @@ class PositionForm(forms.ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
+
+        # if url and not url.startswith('http://'):
+        #     url = 'http://' + url
         cleaned_data['url'] = url
+
         return cleaned_data
 
     class Meta:
@@ -70,8 +74,9 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
     email = forms.CharField(help_text="Please enter your email.")
     username = forms.CharField(help_text="Please enter a username.")
-    first_name= forms.CharField(help_text="Enter your first name.")
-    last_name=forms.CharField(help_text="Enter your last name")
+
+    first_name= forms.CharField
+    last_name=forms.CharField
     is_staff=0
 
     class Meta:
@@ -82,6 +87,12 @@ class UserProfileForm(forms.ModelForm):
      class Meta:
         model = UserProfile
 
+
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c9ce0ed31234b83c681bf9f37abb93e4673ac95
 # class UserForm(forms.ModelForm):
     # username = forms.CharField(help_text="Please enter a username.")
     # email = forms.CharField(help_text="Please enter your email.")
