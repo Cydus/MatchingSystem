@@ -16,7 +16,16 @@
 
                 {% for field in form.visible_fields %}
                 {{ field.errors }}
-                  <span class="help-block">{{ field.help_text }}</span>
+
+                    <span class="help-block">{{ field.help_text }}</span>
+
+                    {% if field.name == "starts" %}
+                    <div class="alert alert-error" id="alert">
+				    <strong>Oh snap!</strong>
+			        </div>
+                    {% endif %}
+
+
                 {{ field }}
                 {% endfor %}
 
@@ -24,5 +33,37 @@
                     <button class="btn btn-primary" type="submit" name="submit">Create Project</button>
                 </form>
             </div>
+            <script>
+
+                //$('#id_starts, #id_expires').datepicker()
+                var startDate = new Date(2012,1,20);
+			var endDate = new Date(2019,1,25);
+
+                					$('.alert').hide();
+
+            			$('#id_starts').datepicker()
+				.on('changeDate', function(ev){
+					if (ev.date.valueOf() > endDate.valueOf()){
+						$('.alert').show().find('strong').text('The start date can not be greater then the end date');
+					} else {
+						$('.alert').hide();
+						startDate = new Date(ev.date);
+						$('#id_starts').text($('#id_starts').data('date'));
+					}
+					$('#id_starts').datepicker('hide');
+				});
+			$('#id_expires').datepicker()
+				.on('changeDate', function(ev){
+					if (ev.date.valueOf() < startDate.valueOf()){
+						$('.alert').show().find('strong').text('The end date can not be less then the start date');
+					} else {
+						$('.alert').hide();
+						endDate = new Date(ev.date);
+						$('#id_expires').text($('#id_expires').data('date'));
+					}
+					$('#id_expires').datepicker('hide');
+				});
+
+            </script>
         </div>
         {% endblock %}

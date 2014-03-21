@@ -17,6 +17,13 @@
                 {% for field in form.visible_fields %}
                 {{ field.errors }}
                 <span class="help-block">{{ field.help_text }}</span>
+
+                    {% if field.name == "starts" %}
+                    <div class="alert alert-error" id="alert">
+				    <strong>Oh snap!</strong>
+			        </div>
+                    {% endif %}
+
                 {{ field }}
                 {% endfor %}
 
@@ -24,5 +31,6 @@
                     <button class="btn btn-primary" type="submit" name="submit">Create Position</button>
                 </form>
             </div>
+            <script>$('#id_dateTimeStarts, #id_dateTimeExpires, #id_dateTimeCreated').datepicker()</script>
         </div>
         {% endblock %}

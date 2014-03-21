@@ -5,6 +5,9 @@ from models import Project, Position, Application
 from matching_system_project.models import UserProfile
 from django.contrib.auth.models import User
 
+from django import forms
+
+dateTimeCreated = forms.TextInput(attrs={'size': 10, 'title': 'Your name',})
 
 class ProjectForm(forms.ModelForm):
     projectName = forms.CharField(max_length=128, help_text="Enter a project name")
@@ -18,8 +21,6 @@ class ProjectForm(forms.ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
-        # if url and not url.startswith('http://'):
-        # url = 'http://' + url
         cleaned_data['url'] = url
 
         return cleaned_data
@@ -27,11 +28,9 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
 
-        # fields = ('projectName', 'description', 'created', 'starts', 'expires', 'active', 'url')
 
 def __init__(self, *args, **kwargs):
             self._user = kwargs.pop('user')
-            # self._user = kwargs.pop()
             super(ProjectForm, self).__init__(*args, **kwargs)
 
 def save(self, commit=True):
@@ -51,7 +50,7 @@ class PositionForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Enter a position name")
     projectID = forms.ModelChoiceField(queryset=Project.objects.all(),help_text="Select Project")
     description = forms.CharField(max_length=999, help_text="Describe the position")
-    dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
+    # dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
     dateTimeStarts = forms.DateField(help_text="Enter the date when the position will start")
     dateTimeExpires = forms.DateField(help_text="Enter the date when the position will expire")
     url = forms.CharField(max_length=256, help_text="Enter the URL", )
@@ -87,6 +86,8 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
      class Meta:
         model = UserProfile
+
+
 
 
 # class UserForm(forms.ModelForm):
