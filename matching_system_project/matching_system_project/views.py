@@ -6,6 +6,7 @@ from django.db import models
 
 from forms import UserForm, UserProfileForm
 
+from django.contrib.auth import authenticate
 
 from forms import ProjectForm, PositionForm
 from django.contrib.auth.decorators import login_required
@@ -24,18 +25,25 @@ def index(request):
 
     context = RequestContext(request )
 
-    if request.method == 'POST':
-        print "hHihisdfisdfidsifd"
-        # print User.objects.get(request.POST['user_id'])
 
     position_list = Position.objects.all()
     app_lisr=Application.objects.all()
+    pos_list=[]
+    ap_list=[]
 
     position_dict ={'positions':position_list,'applications':app_lisr}
     return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
     #                     '<a href="/projects">View Projects</a>')
+
+
+
+
+
+
+
+
 
 def projects(request):
     return HttpResponse("PROJECTS IN YOUR FACE MOFO")

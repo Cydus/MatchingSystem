@@ -89,6 +89,7 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
 
 
+
 # class UserForm(forms.ModelForm):
     # username = forms.CharField(help_text="Please enter a username.")
     # email = forms.CharField(help_text="Please enter your email.")
