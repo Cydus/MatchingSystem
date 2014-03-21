@@ -11,20 +11,9 @@ class Project(models.Model):
     expires = models.DateField(verbose_name="End Date")
     active = models.BooleanField(default=True)
     url = models.CharField(max_length=256)
-    #
-    # def save(self):
-    #     if not self.url:
-    #         self.url = "tttt"
-    #     super(Project, self).save()
-    #
-
-    # def pre_save(self, request, extra_command="", *args, **kwargs):
-    #     print "hihihihi"
-    #     usr = request.user
-    #     self.fk_CreatedBy = usr
 
     def post_save(self, request, extra_command="", *args, **kwargs):
-        print "I HATE DJANGO"
+        print "I LIKE DJANGO"
         self.fk_CreatedBy = request.user
         self.save()
 
@@ -46,8 +35,9 @@ class Position(models.Model):
     def __unicode__(self):
         return self.title.lower()
 
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
+# from django.db.models.signals import pre_save, post_save
+# from django.dispatch import receiver
+
 from django.db.models import signals
 
 class Application(models.Model):
@@ -57,22 +47,8 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
 
-    # url = models.CharField(max_length=128)
-    # if (PositionID.isOpen == False):
 
-    print "----------------- SETTING " + "" + " TO FALSE -------------------"
-
-
-
-    # if Position.objects.get(title="Web Developer").isOpen:
-    #     print "HALOOOOOOOOOOOOOOOOOOOOO"
-
-    # print Position.objects.filter(title="Web Developer")
-        # PositionID.isOpen = False
-
-    # from django.core.signals import request_finished
-    # import django.core.signals
-    # # request_finished.connect(pre_save)
+    print "------ SETTING " + "" + " TO FALSE ---------"
 
     def pre_save(self, extra_command="", *args, **kwargs):
         print "lol"
@@ -83,7 +59,7 @@ class Application(models.Model):
         print pos.isOpen
 
         pos.fk_ApplicantID = self.UserID
-        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWW"
         pos.save()
 
 
@@ -94,10 +70,8 @@ class Application(models.Model):
             pos.isOpen=False
             pos.save()
 
-        # pos.save()
 
     def __unicode__(self):
-        # + 'Project: ' + self.PositionID.ProjectID.projectName +
 
         print self.PositionID.title
 
@@ -118,22 +92,5 @@ def create_project(request, sender, instance, created, **kwargs):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
-
-    # dob = models.DateField()
-
-    # Override the __unicode__() method to return out something meaningful!
-
     def __unicode__(self):
         return self.user.username
-
-# class UserProfile(models.Model):
-#     # This line is required. Links UserProfile to a User model instance.
-#     user = models.OneToOneField(User)
-#
-#     # The additional attributes we wish to include.
-#     website = models.CharField(blank=True)
-#     picture = models.ImageField(upload_to='profile_images', blank=True)
-#
-#     # Override the __unicode__() method to return out something meaningful!
-#     def __unicode__(self):
-#         return self.user.username

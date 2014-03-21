@@ -89,10 +89,7 @@ class UserProfileForm(forms.ModelForm):
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7c9ce0ed31234b83c681bf9f37abb93e4673ac95
 # class UserForm(forms.ModelForm):
     # username = forms.CharField(help_text="Please enter a username.")
     # email = forms.CharField(help_text="Please enter your email.")
