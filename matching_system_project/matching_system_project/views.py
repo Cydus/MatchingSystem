@@ -19,7 +19,7 @@ from models import Application
 from django.contrib.auth.models import User
 
 from django.core.mail import send_mail, mail_admins
-
+from django.core.mail.backends.smtp import EmailBackend
 from django.http import HttpResponse
 
 from django.contrib.auth import authenticate, login
@@ -278,6 +278,21 @@ def accept(request,appid):
         pos.isOpen = False
         pos.fk_ApplicantID = app.UserID
         pos.save()
+
+    #     send_mail( "Hellow", "Kak dela?",
+    #     'matchingsystem.3sigma@yahoo.com',
+    #     ['u.amrah@gmail.com'],
+    #     auth_user='matchingsystem.3sigma',
+    #     auth_password='Django2014', connection=EmailBackend(
+    #         host='smtp.yahoo.com',
+    #         port=587,
+    #         username='matchingsystem.3sigma',
+    #         password='Django2014',
+    #         use_tls=True
+    #     )
+    # )
+
+
         send_mail("Test","Your text message! Data sent:  "  , 'matchingsystem.3sigma@yahoo.com',['u.amrah@gmail.com'], fail_silently=False )
         #mail_admins("other subject","some text",fail_silently=False)
        # Application.objects.set(seenByPm=True )

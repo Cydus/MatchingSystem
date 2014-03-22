@@ -130,13 +130,13 @@ MEDIA_ROOT = os.path.join(PROJECT_PATH, 'matching_system_project/matching_system
 # EMAIL_USE_TLS=True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'matchingsystem.3sigma@yahoo.com'
+DEFAULT_FROM_EMAIL = 'vaspetr506@gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.yahoo.com'
-EMAIL_HOST_USER = 'matchingsystem.3sigma'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'vaspetr506@gmail.com'
 EMAIL_HOST_PASSWORD = 'Django2014'
-EMAIL_PORT = 25
-SERVER_EMAIL = 'matchingsystem.3sigma@yahoo.com'
+EMAIL_PORT = 587
+SERVER_EMAIL = 'vaspetr506@gmail.com'
 
 
 # EMAIL_HOST = '124.108.115.167';
