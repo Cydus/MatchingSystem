@@ -94,6 +94,7 @@
 
                 <a href="/apply/{{ user.id }}/{{ position.id }}" class="allready-applied btn btn-success">Applied</a>
 
+
                 {% else %}
                 {%  if forloop.last and a.PositionID.id != position.id %}
                 <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply Now</a>
@@ -115,16 +116,48 @@
 
       <script type="text/javascript">
 
-        if ($(".position > .allready-applied")) {
-            $(this).append("<b>LOLOLOLO</b>");
-        }
+
+{#        $(".position").on(document.load(),(function() {#}
+{#          //if ($(this).find(".allready-applied").length > 0) {#}
+{#            $(this).append("applied");#}
+          //}
+
+          i = 1
+
+          $(".position .allready-applied").each(function() {
+
+            //$(".position")(function() {
+              //if ($(this).find(".allready-applied").length > 0) {
+
+{#            $(this).append("sfdgdgf");#}
+
+            apply = $(this).parents(".position");
+
+            console.log(apply);
+
+            parent = this.parent;
+
+                child = $(apply).children(".apply");
+
+                $(child).hide();
+
+
+            //$(this).children("apply").addClass("applied");
+
+
+{#              console.log(this > ".allready-applied");#}
+{#              }#}
+             // $(".position").hide();
+           // }
+
+          });
 
 
         $("a.apply").click(function(){
 
           $(this).after('<div class="btn btn-success" style="width: 100px;">Applied</div>')
           $(this).remove();
-          var curr_elem = $(this) ;
+          var curr_elem = $(this);
 
           $.get($(this).attr('href'), function(data){
             var my_div = $(curr_elem).parent().find("b");
