@@ -4,6 +4,9 @@ from django.shortcuts import render_to_response
 from models import Project, Position, Application
 from django.db import models
 
+from django.forms import CharField
+from django.core import validators
+
 from forms import UserForm, UserProfileForm
 
 from django.contrib.auth import authenticate
@@ -15,6 +18,7 @@ from django.contrib.auth import logout
 from models import Application
 from django.contrib.auth.models import User
 
+from django.core.mail import send_mail, mail_admins
 
 from django.http import HttpResponse
 
@@ -129,9 +133,14 @@ def register(request):
         if user_form.is_valid():
 
             user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            registered = True
+
+            if User.objects.filter(email=user.email).exists():
+               #  user_form.email.default_error_messages
+                 print "error"
+            else:
+             user.set_password(user.password)
+             user.save()
+             registered = True
         else:
             print user_form.errors,
     else:
@@ -269,8 +278,8 @@ def accept(request,appid):
         pos.isOpen = False
         pos.fk_ApplicantID = app.UserID
         pos.save()
-
-
+        send_mail("Test","Your text message! Data sent:  "  , 'matchingsystem.3sigma@yahoo.com',['u.amrah@gmail.com'], fail_silently=False )
+        #mail_admins("other subject","some text",fail_silently=False)
        # Application.objects.set(seenByPm=True )
        # Application.objects.set(accepted=True )
      #  Application.objects.get(pk=appid).accepted=True

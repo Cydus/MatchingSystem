@@ -5,6 +5,12 @@ from models import Project, Position, Application
 from matching_system_project.models import UserProfile
 from django.contrib.auth.models import User
 
+from django.core.exceptions import ValidationError
+
+
+from django.forms import CharField
+from django.core import validators
+
 from django import forms
 
 dateTimeCreated = forms.TextInput(attrs={'size': 10, 'title': 'Your name',})
@@ -68,15 +74,19 @@ class PositionForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter a password.")
-    email = forms.CharField(help_text="Please enter your email.")
+    email = forms.CharField(help_text="Please enter your email.", error_messages={'invalid':'User with this e-mail already registred'} )
     username = forms.CharField(help_text="Please enter a username.")
     first_name= forms.CharField(help_text="Enter your first name.")
     last_name=forms.CharField(help_text="Enter your last name")
     is_staff=0
 
+
+
     class Meta:
         model = User
         fields = ('username','first_name','last_name', 'email', 'password')
+
+
 
 class UserProfileForm(forms.ModelForm):
      class Meta:
