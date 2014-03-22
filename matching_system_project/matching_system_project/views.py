@@ -25,6 +25,24 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 
+import re
+
+from django.template import Library, Node
+from django.template.defaultfilters import stringfilter
+
+register = Library()
+
+def paragraphs(value):
+    paras = re.split(r'[\r\n]+', value)
+    paras = ['<p>%s</p>' % p.strip() for p in paras]
+    return '\n'.join(paras)
+
+paragraphs = stringfilter(paragraphs)
+
+register.filter(paragraphs)
+
+
+
 def index(request):
 
     context = RequestContext(request )
@@ -34,8 +52,13 @@ def index(request):
     app_list=Application.objects.all()
     pos_list=[]
     ap_list=[]
+    for p in position_list:
+        p.description=paragraphs(p.description)
+        pos_list.append(p)
 
-    position_dict ={'positions':position_list,'applications':app_list}
+
+
+    position_dict ={'positions':pos_list,'applications':app_list}
     return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
@@ -64,6 +87,10 @@ def project(request, project_name_url):
 
     position_list = Position.objects.all()
     print position_list
+    p_list=[]
+    for p in position_list:
+      p.description=paragraphs(p.description)
+      p_list.append(p)
 
     position_dict ={'positions':position_list}
 
@@ -71,7 +98,7 @@ def project(request, project_name_url):
     context_dict = {
         'projectName': project.projectName,
         'description': project.description,
-        'position_list': position_list,
+        'position_list': p_list,
         'applications':app_list,
 
     }
@@ -123,10 +150,10 @@ def add_position(request):
     return render_to_response('matching_system_project/add_position.html', {'form': form}, context)
 
 def register(request):
-    context = RequestContext(request)
-    registered = False
+      context = RequestContext(request)
+      registered = False
 
-    if request.method == 'POST':
+      if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
        # profile_form = UserProfileForm(data=request.POST)
@@ -135,19 +162,19 @@ def register(request):
 
             user = user_form.save()
 
-            if User.objects.filter(email=user.email).exists():
+            # if User.objects.filter(email=user.email).exists():
                #  user_form.email.default_error_messages
-                 print "error"
-            else:
-             user.set_password(user.password)
-             user.save()
-             registered = True
+               #   print "error"
+            # else:
+            user.set_password(user.password)
+            user.save()
+            registered = True
         else:
             print user_form.errors,
-    else:
-        user_form = UserForm()
+      else:
+          user_form = UserForm()
 
-    return render_to_response(
+      return render_to_response(
             'matching_system_project/register.html',
             {'user_form': user_form,  'registered': registered},
             context)
