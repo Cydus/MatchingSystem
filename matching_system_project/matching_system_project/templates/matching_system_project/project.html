@@ -36,7 +36,7 @@
 
               </p>
               <br/>
-
+              {% if  user.is_authenticated %}
               {% for  a in applications %}
 
 
@@ -50,6 +50,14 @@
                 {% endif %}
               {% endif %}
               {% endfor %}
+                {% else %}
+
+                <div class="btn-group">
+                  <a href="/register/" class="btn btn-small">Register</a>
+                  <a href="/login" class="btn btn-small">Log In</a>
+                </div>
+
+                {% endif %}
 
 
             {% endif %}
