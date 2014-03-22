@@ -124,44 +124,20 @@
 
   <script type="text/javascript">
 
-
-    {#        $(".position").on(document.load(),(function() {#}
-    {#          //if ($(this).find(".allready-applied").length > 0) {#}
-    {#            $(this).append("applied");#}
-    //}
-
-    i = 1
-
     $(".position .allready-applied").each(function () {
 
-      //$(".position")(function() {
-      //if ($(this).find(".allready-applied").length > 0) {
-
-      {#            $(this).append("sfdgdgf");#}
 
       apply = $(this).parents(".position");
-
       console.log(apply);
-
       parent = this.parent;
-
       child = $(apply).children(".apply");
-
       $(child).hide();
-
-      //$(this).children("apply").addClass("applied");
-
-      {#              console.log(this > ".allready-applied");#}
-      {#              }#}
-      // $(".position").hide();
-      // }
-
     });
 
     $("a.apply").click(function () {
 
-      $(this).after('<div class="btn btn-success" style="width: 100px;">Applied</div>')
-      $(this).remove();
+      $(this).after('<div class="btn btn-success btn-small">Applied</div>')
+      $(this).hide();
       var curr_elem = $(this);
 
       $.get($(this).attr('href'), function (data) {

@@ -31,11 +31,11 @@ def index(request):
 
 
     position_list = Position.objects.all()
-    app_lisr=Application.objects.all()
+    app_list=Application.objects.all()
     pos_list=[]
     ap_list=[]
 
-    position_dict ={'positions':position_list,'applications':app_lisr}
+    position_dict ={'positions':position_list,'applications':app_list}
     return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
@@ -59,7 +59,7 @@ def project(request, project_name_url):
     project = Project.objects.get(url=project_name_url)
 
     project_name = project_name_url.replace('_', ' ' )
-
+    app_list=Application.objects.all()
     # position lis
 
     position_list = Position.objects.all()
@@ -72,6 +72,7 @@ def project(request, project_name_url):
         'projectName': project.projectName,
         'description': project.description,
         'position_list': position_list,
+        'applications':app_list,
 
     }
 

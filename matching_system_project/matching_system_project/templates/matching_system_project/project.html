@@ -20,26 +20,65 @@
   {% if position_list %}
     <div class="alert-success alert"><h2>Open Positions</h2></div>
 
-    {% for position in position_list %}
-      {% if projectName == position.projectID.projectName %}
-        {% if position.isOpen %}
+{# ###### #}
 
-          <hr>
-          <h4><span class="span6 text-left ">{{ position.title }}</span></h4>
-          <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
-          <p>
-            {{ position.description }}
+        {% for position in position_list %}
+          <div class="position">
+          {% if projectName == position.projectID.projectName %}
+            {% if position.isOpen %}
+
+              <hr>
+              <h4><span class="span6 text-left ">{{ position.title }}</span></h4>
+              <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
+              <p>
+                {{ position.description }}
 
 
-          </p>
-          <br/>
-          {% if user.is_authenticated %}
-            <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply
-              Now</a>
+              </p>
+              <br/>
+
+              {% for  a in applications %}
+
+
+              {% if  user == a.UserID and a.PositionID.id == position.id %}
+                <a href="/apply/{{ user.id }}/{{ position.id }}"
+                   class="allready-applied btn btn-success btn-small">Applied</a>
+              {% else %}
+                {% if forloop.last and a.PositionID.id != position.id %}
+                  <a href="/apply/{{ user.id }}/{{ position.id }}"
+                     class="apply btn btn-small">Apply Now</a>
+                {% endif %}
+              {% endif %}
+              {% endfor %}
+
+
+            {% endif %}
           {% endif %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
+          </div>
+        {% endfor %}
+
+
+
+{#    {% for position in position_list %}#}
+{#      {% if projectName == position.projectID.projectName %}#}
+{#        {% if position.isOpen %}#}
+{##}
+{#          <hr>#}
+{#          <h4><span class="span6 text-left ">{{ position.title }}</span></h4>#}
+{#          <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>#}
+{#          <p>#}
+{#            {{ position.description }}#}
+{##}
+{##}
+{#          </p>#}
+{#          <br/>#}
+{#          {% if user.is_authenticated %}#}
+{#            <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply#}
+{#              Now</a>#}
+{#          {% endif %}#}
+{#        {% endif %}#}
+{#      {% endif %}#}
+{#    {% endfor %}#}
 
   {% else %}
     <strong>No open positions for this project.</strong>
@@ -76,9 +115,19 @@
 
   <script type="text/javascript">
 
+    $(".position .allready-applied").each(function () {
+
+
+      apply = $(this).parents(".position");
+      console.log(apply);
+      parent = this.parent;
+      child = $(apply).children(".apply");
+      $(child).hide();
+    });
+
     $("a.apply").click(function () {
 
-      $(this).after('<div class="btn btn-success" style="width: 100px;">Applied</div>')
+      $(this).after('<div class="btn btn-success btn-small" style="width: 100px;">Applied</div>')
       $(this).remove();
       var curr_elem = $(this);
 
