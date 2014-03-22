@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from models import Project, Position, Application
 
-from matching_system_project.models import UserProfile
+from models import UserProfile
 from django.contrib.auth.models import User
 
 from django.core.exceptions import ValidationError
