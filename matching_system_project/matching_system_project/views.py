@@ -265,6 +265,7 @@ def apply(request, uid, posid):
 
 def accept(request,appid):
 
+  if  request.user.is_authenticated:
     app= Application.objects.get(pk=appid)
 
     if Application.objects.get(pk=appid).accepted == False:
@@ -279,21 +280,11 @@ def accept(request,appid):
         pos.fk_ApplicantID = app.UserID
         pos.save()
 
-    #     send_mail( "Hellow", "Kak dela?",
-    #     'matchingsystem.3sigma@yahoo.com',
-    #     ['u.amrah@gmail.com'],
-    #     auth_user='matchingsystem.3sigma',
-    #     auth_password='Django2014', connection=EmailBackend(
-    #         host='smtp.yahoo.com',
-    #         port=587,
-    #         username='matchingsystem.3sigma',
-    #         password='Django2014',
-    #         use_tls=True
-    #     )
-    # )
 
+        embod="Dear, "+app.UserID.first_name +" "+app.UserID.last_name +",your application  for a   "+pos.title+" position " +" in "+pos.projectID.projectName +" was successfull." \
+               + " Regards,  " + pos.projectID.fk_CreatedBy.first_name +"  " + pos.projectID.fk_CreatedBy.last_name
 
-        send_mail("Test","Your text message! Data sent:  "  , 'matchingsystem.3sigma@yahoo.com',['u.amrah@gmail.com'], fail_silently=False )
+        send_mail("Project Matching System",embod  , 'vaspetr506@gmail.com',['matchingsystem.3sigma@yahoo.com'], fail_silently=False )
         #mail_admins("other subject","some text",fail_silently=False)
        # Application.objects.set(seenByPm=True )
        # Application.objects.set(accepted=True )
