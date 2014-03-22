@@ -4,95 +4,94 @@
 
 
 <!--<head>-->
-  <!--<title>Matching System</title>-->
-    <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
+<!--<title>Matching System</title>-->
+<!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
 <!--</head>-->
 
 
+{% load static %}
+{% block title %}
+  <title>Matching System Project: Projects</title>  {% endblock %}
+{% block body_block %}
+  <div class="alert alert-info ">
+    <h1>{{ projectName }}</h1>
+    <span>{{ description }}</span></div>
 
-    {% load static %}
-    {% block title %} <title>Matching System Project: Projects</title>  {% endblock %}
-    {% block body_block%}
-      <div class="alert alert-info ">
-            <h1>{{ projectName }}</h1>
-      <span>{{ description }}</span></div>
+  {% if position_list %}
+    <div class="alert-success alert"><h2>Open Positions</h2></div>
 
-            {% if position_list %}
-            <div class="alert-success alert"><h2>Open Positions</h2></div>
-
-                    {% for position in position_list %}
-                        {% if projectName == position.projectID.projectName %}
-                            {% if position.isOpen %}
-
-                        <hr>
-                              <h4><span class="span6 text-left ">{{position.title}}</span></h4>
-                              <span class="span6 text-right text-info">{{position.dateTimeStarts}}  - {{position.dateTimeExpires}}</span>
-                        <p>
-                            {{position.description}}
-
-
-
-                        </p>
-                        <br/>
-                              {% if user.is_authenticated  %}
-                              <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply Now</a>
-                               {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-
-            {% else %}
-            <strong>No open positions for this project.</strong>
-        {% endif %}
-
-
-{% if position_list %}
-  <h2>Current Team</h2>
-  <div class="twocollum">
     {% for position in position_list %}
       {% if projectName == position.projectID.projectName %}
-{#        {% if position.fk_ApplicantID == True %}#}
+        {% if position.isOpen %}
 
-    <div class="colitem">
-            <h4>{{ position.fk_ApplicantID}}</h4>
-        <p>
-        {{position.title}}
-{#            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}#}
+          <hr>
+          <h4><span class="span6 text-left ">{{ position.title }}</span></h4>
+          <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
+          <p>
+            {{ position.description }}
+
+
           </p>
-{#          <a href="{{position.projectID}}">Apply</a>#}
-{#           <hr>#}
-        </div>
-{#        {% endif %}#}
+          <br/>
+          {% if user.is_authenticated %}
+            <a href="/apply/{{ user.id }}/{{ position.id }}" class="apply btn">Apply
+              Now</a>
+          {% endif %}
+        {% endif %}
       {% endif %}
     {% endfor %}
-{% else %}
-  <strong>No open positions for this project.</strong>
-  </div>
-{% endif %}
 
-<!--<a href="/admin/">ADMIN LOGIN</a><br />-->
-      <input type="hidden" name="profile_id" value="{{ user.id }}"/>
-
-      <script type="text/javascript">
-
-        $("a.apply").click(function(){
-
-          $(this).after('<div class="btn btn-success" style="width: 100px;">Applied</div>')
-          $(this).remove();
-          var curr_elem = $(this) ;
-
-          $.get($(this).attr('href'), function(data){
-            var my_div = $(curr_elem).parent().find("b");
-            my_div.text(my_div.text()*1+1);
-          });
+  {% else %}
+    <strong>No open positions for this project.</strong>
+  {% endif %}
 
 
-          {#                      $(this).addClass("applied");#}
+  {% if position_list %}
+    <h2>Current Team</h2>
+    <div class="twocollum">
+      {% for position in position_list %}
+        {% if projectName == position.projectID.projectName %}
+          {#        {% if position.fk_ApplicantID == True %}#}
 
+          <div class="colitem">
+            <h4>{{ position.fk_ApplicantID }}</h4>
 
-          return false; // prevent loading URL from href
+            <p>
+              {{ position.title }}
+              {#            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}#}
+            </p>
+            {#          <a href="{{position.projectID}}">Apply</a>#}
+            {#           <hr>#}
+          </div>
+          {#        {% endif %}#}
+        {% endif %}
+      {% endfor %}
+      {% else %}
+      <strong>No open positions for this project.</strong>
+    </div>
+  {% endif %}
 
-        });
-      </script>
+  <!--<a href="/admin/">ADMIN LOGIN</a><br />-->
+  <input type="hidden" name="profile_id" value="{{ user.id }}"/>
+
+  <script type="text/javascript">
+
+    $("a.apply").click(function () {
+
+      $(this).after('<div class="btn btn-success" style="width: 100px;">Applied</div>')
+      $(this).remove();
+      var curr_elem = $(this);
+
+      $.get($(this).attr('href'), function (data) {
+        var my_div = $(curr_elem).parent().find("b");
+        my_div.text(my_div.text() * 1 + 1);
+      });
+
+      {#                      $(this).addClass("applied");#}
+
+      return false; // prevent loading URL from href
+
+    });
+  </script>
 
 {% endblock %}
