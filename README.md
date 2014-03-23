@@ -1,8 +1,8 @@
 Overview
 --------
 
-This is a systemt to help applicants and managers both apply to projects and approve
-applications respectively. PMs also get a to create projects and positions. We have some
+This is a system to help applicants and managers both apply to projects and approve
+applications respectively. PMs also get to create projects and positions. We have
 a list of functionality including ajax features and email notifications outlined in the
 achivements section of this readme.
 
@@ -17,8 +17,8 @@ A demo of the Project Matching System can be access on http://davidball.me
 4. Approve some of the applications you created and explore the interface.
 5. You may want to login as the applicant to see the changes.
 
-Note that an email will be sent to the applicant users email
-you when you approve the application, so proivde a working email address if possible.
+Note that an email will be sent to the applicant users email so provide a working email address if possible.
+when "the manager" approves the application the e-mail is sent
 
 Local Installation
 ------------------
