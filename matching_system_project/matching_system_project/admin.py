@@ -2,10 +2,7 @@ from django.contrib import admin
 # from models import Project, Position, Application
 
 
-from models import UserProfile
-
 from models import Project, Position, Application, UserProfile
-
 
 
 admin.site.register(Position)

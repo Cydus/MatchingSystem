@@ -17,7 +17,7 @@
 }
 
 .colitem {
-float: left;
+  float: left;
   width: 50%;
 }
 
@@ -31,34 +31,34 @@ float: left;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
-    /*.container-fluid {*/
-    /*margin-top: 60px;*/
-/*}*/
+  /*.container-fluid {*/
+  /*margin-top: 60px;*/
+  /*}*/
 }
 
 @media (max-width: 767px) {
-/*.container-fluid {*/
-    /*margin-top: 60px;*/
-/*}*/
+  /*.container-fluid {*/
+  /*margin-top: 60px;*/
+  /*}*/
 }
 
 @media (max-width: 979px) {
-/*.container-fluid {*/
-    /*margin-top: 60px;*/
-/*}*/
+  /*.container-fluid {*/
+  /*margin-top: 60px;*/
+  /*}*/
 }
 
 @media (min-width: 980px) {
-.container-fluid {
+  .container-fluid {
     /*margin-top: 60px;*/
-}
+  }
 }
 
 @media (min-width: 1200px) {
 
-.container-fluid {
+  .container-fluid {
     /*margin-top: 60px;*/
-}
+  }
 }
 
 

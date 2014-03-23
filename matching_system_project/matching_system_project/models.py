@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Project(models.Model):
-    fk_CreatedBy = models.ForeignKey(User, null=False, blank=False, editable=True, auto_created=User)
+    fk_CreatedBy = models.ForeignKey(User, null=False, blank=False,
+                                     editable=True, auto_created=User)
     projectName = models.CharField(max_length=128, unique=True)
     description = models.TextField(max_length=999)
     created = models.DateField(auto_now_add=True)
@@ -20,6 +21,7 @@ class Project(models.Model):
     def __unicode__(self):
         return self.projectName.lower()
 
+
 class Position(models.Model):
     title = models.CharField(max_length=128)
     projectID = models.ForeignKey('Project')
@@ -29,16 +31,16 @@ class Position(models.Model):
     dateTimeExpires = models.DateField(verbose_name="End Date")
     url = models.CharField(max_length=256, editable=False)
 
-    fk_ApplicantID = models.ForeignKey(User, null=True, blank=True, editable=False)
+    fk_ApplicantID = models.ForeignKey(User, null=True, blank=True,
+                                       editable=False)
     isOpen = models.BooleanField(default=True, editable=False)
 
     def __unicode__(self):
         return self.title.lower()
 
-# from django.db.models.signals import pre_save, post_save
-# from django.dispatch import receiver
 
 from django.db.models import signals
+
 
 class Application(models.Model):
     UserID = models.ForeignKey(User)
@@ -46,7 +48,6 @@ class Application(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
-
 
     print "------ SETTING " + "" + " TO FALSE ---------"
 
@@ -62,21 +63,17 @@ class Application(models.Model):
         print "WWWWWWWWWWWWWWWWWWWWWWWWWWWW"
         pos.save()
 
-
         if (self.accepted == True):
-
             print "position has been accepted"
 
-            pos.isOpen=False
+            pos.isOpen = False
             pos.save()
 
 
     def __unicode__(self):
-
         print self.PositionID.title
 
         return (self.UserID.username + ' applied for: ' + self.PositionID.title)
-
 
 
 def update_position(sender, instance, created, **kwargs):

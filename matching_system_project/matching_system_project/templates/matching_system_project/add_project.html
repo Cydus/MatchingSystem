@@ -1,68 +1,73 @@
 {% extends 'matching_system_project/base.html' %}
 
-        {% block title %}  <title>Matching System Project: Projects</title> {% endblock %}
+{% block title %}
+  <title>Matching System Project: Projects</title> {% endblock %}
 
 
-        {% block body_block %}
-        <div class="hero-unit">
-        <h1>Add a Project</h1>
-        <br/>
-            <div class="container">
-                <form class="span6" id="project_form" method="post" action="/projects/add_project/">
-                {% csrf_token %}
-                {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-                {% endfor %}
+{% block body_block %}
+  <div class="hero-unit">
+    <h1>Add a Project</h1>
+    <br/>
 
-                {% for field in form.visible_fields %}
-                {{ field.errors }}
+    <div class="container">
+      <form class="span6" id="project_form" method="post"
+            action="/projects/add_project/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
 
-                    <span class="help-block">{{ field.help_text }}</span>
+        {% for field in form.visible_fields %}
+          {{ field.errors }}
 
-                    {% if field.name == "starts" %}
-                    <div class="alert alert-error" id="alert">
-				    <strong>Oh snap!</strong>
-			        </div>
-                    {% endif %}
+          <span class="help-block">{{ field.help_text }}</span>
 
-
-                {{ field }}
-                {% endfor %}
-
-                <br/>
-                    <button class="btn btn-primary" type="submit" name="submit">Create Project</button>
-                </form>
+          {% if field.name == "starts" %}
+            <div class="alert alert-error" id="alert">
+              <strong>Oh snap!</strong>
             </div>
-            <script>
+          {% endif %}
 
-                var startDate = new Date(2012,1,20);
-			var endDate = new Date(2019,1,25);
 
-                					$('.alert').hide();
+          {{ field }}
+        {% endfor %}
 
-            			$('#id_starts').datepicker()
-				.on('changeDate', function(ev){
-					if (ev.date.valueOf() > endDate.valueOf()){
-						$('.alert').show().find('strong').text('The start date can not be greater then the end date');
-					} else {
-						$('.alert').hide();
-						startDate = new Date(ev.date);
-						$('#id_starts').text($('#id_starts').data('date'));
-					}
-					$('#id_starts').datepicker('hide');
-				});
-			$('#id_expires').datepicker()
-				.on('changeDate', function(ev){
-					if (ev.date.valueOf() < startDate.valueOf()){
-						$('.alert').show().find('strong').text('The end date can not be less then the start date');
-					} else {
-						$('.alert').hide();
-						endDate = new Date(ev.date);
-						$('#id_expires').text($('#id_expires').data('date'));
-					}
-					$('#id_expires').datepicker('hide');
-				});
+        <br/>
+        <button class="btn btn-primary" type="submit" name="submit">Create
+          Project
+        </button>
+      </form>
+    </div>
+    <script>
 
-            </script>
-        </div>
-        {% endblock %}
+      var startDate = new Date(2012, 1, 20);
+      var endDate = new Date(2019, 1, 25);
+
+      $('.alert').hide();
+
+      $('#id_starts').datepicker()
+        .on('changeDate', function (ev) {
+          if (ev.date.valueOf() > endDate.valueOf()) {
+            $('.alert').show().find('strong').text('The start date can not be greater then the end date');
+          } else {
+            $('.alert').hide();
+            startDate = new Date(ev.date);
+            $('#id_starts').text($('#id_starts').data('date'));
+          }
+          $('#id_starts').datepicker('hide');
+        });
+      $('#id_expires').datepicker()
+        .on('changeDate', function (ev) {
+          if (ev.date.valueOf() < startDate.valueOf()) {
+            $('.alert').show().find('strong').text('The end date can not be less then the start date');
+          } else {
+            $('.alert').hide();
+            endDate = new Date(ev.date);
+            $('#id_expires').text($('#id_expires').data('date'));
+          }
+          $('#id_expires').datepicker('hide');
+        });
+
+    </script>
+  </div>
+{% endblock %}

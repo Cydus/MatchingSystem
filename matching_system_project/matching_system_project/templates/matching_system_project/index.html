@@ -15,7 +15,8 @@
 
   <form id="live-search" action="" class="styled" method="post">
     <fieldset>
-      <input type="text" class="text-input" id="filter" value="search for positons or projects"/>
+      <input type="text" class="text-input" id="filter"
+             value="search for positons or projects"/>
       <span id="filter-count"></span>
     </fieldset>
   </form>
@@ -69,50 +70,52 @@
       {% if position.isOpen %}
 
         <div class="position">
-        <hr>
-        <p>
-        <h4><span id="title"
-                  class="span6 text-left ">{{ position.title }}</span></h4>
+          <hr>
+          <p>
+          <h4><span id="title"
+                    class="span6 text-left ">{{ position.title }}</span></h4>
 
 
-        <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
+          <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
 
-        </p>
-
-
-        <a href=/projects/{{position.projectID.url}}>{{ position.projectID.projectName }} </a>
-
-        <p>
-          {{position.description|safe}}
-        </p>
-        <br/>
-
-        <a href="/projects/{{ position.projectID.url }}" class="btn btn-small">View
-          Project</a>
-
-        {% if  user.is_authenticated %}
-
-          {% for  a in applications %}
+          </p>
 
 
-            {% if  user == a.UserID and a.PositionID.id == position.id %}
-              <a href="/apply/{{ user.id }}/{{ position.id }}"
-                 class="allready-applied btn btn-success btn-small">Applied</a>
-            {% else %}
-              {% if forloop.last and a.PositionID.id != position.id %}
+          <a
+            href=/projects/{{ position.projectID.url }}>{{ position.projectID.projectName }} </a>
+
+          <p>
+            {{ position.description|safe }}
+          </p>
+          <br/>
+
+          <a href="/projects/{{ position.projectID.url }}"
+             class="btn btn-small">View
+            Project</a>
+
+          {% if  user.is_authenticated %}
+
+            {% for  a in applications %}
+
+
+              {% if  user == a.UserID and a.PositionID.id == position.id %}
                 <a href="/apply/{{ user.id }}/{{ position.id }}"
-                   class="apply btn btn-small">Apply Now</a>
+                   class="allready-applied btn btn-success btn-small">Applied</a>
+              {% else %}
+                {% if forloop.last and a.PositionID.id != position.id %}
+                  <a href="/apply/{{ user.id }}/{{ position.id }}"
+                     class="apply btn btn-small">Apply Now</a>
+                {% endif %}
               {% endif %}
-            {% endif %}
 
 
-          {% endfor %}
-        {% else %}
+            {% endfor %}
+          {% else %}
 
-          <div class="btn-group">
-          <a href="/register/" class="btn btn-small">Register</a> or
-          <a href="/login" class="btn btn-small">Log In</a> to apply
-          </div>
+            <div class="btn-group">
+              <a href="/register/" class="btn btn-small">Register</a> or
+              <a href="/login" class="btn btn-small">Log In</a> to apply
+            </div>
 
           {% endif %}
 
@@ -132,7 +135,6 @@
   <script type="text/javascript">
 
     $(".position .allready-applied").each(function () {
-
 
       apply = $(this).parents(".position");
       console.log(apply);

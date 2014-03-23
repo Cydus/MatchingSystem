@@ -1,4 +1,3 @@
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 import os
@@ -15,7 +14,7 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 # Static Path
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -32,21 +31,9 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
-
-
-ADMINS =(
-    ('Webmaster','webmaster@pro')
+ADMINS = (
+    ('Webmaster', 'webmaster@pro')
 )
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# # EMAIL_USE_TLS = True
-# # EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST = 'localhost'
-# # EMAIL_PORT = 587
-# EMAIL_PORT = 1025
-# EMAIL_HOST_USER = 'davidb1985@gmail.com'
-# EMAIL_HOST_PASSWORD = 'meemailaccess'
-# # EMAIL_BACKEND = 'localhost'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,14 +107,8 @@ TEMPLATE_DIRS = (
 
 # Media Director
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'matching_system_project/matching_system_project/media') # Absolute path to the media directory
-
-
-# EMAIL_HOST="yourmailserver.com"
-# EMAIL_HOST_USER="user"
-# EMAIL_HOST_PASSWORD="password"
-# EMAIL_PORT=25
-# EMAIL_USE_TLS=True
+MEDIA_ROOT = os.path.join(PROJECT_PATH,
+                          'matching_system_project/matching_system_project/media')  # Absolute path to the media directory
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'vaspetr506@gmail.com'
@@ -139,32 +120,3 @@ EMAIL_PORT = 587
 SERVER_EMAIL = 'vaspetr506@gmail.com'
 
 
-# EMAIL_HOST = '124.108.115.167';
-# EMAIL_PORT = 25;
-# EMAIL_HOST_USER = 'matchingsystem.3sigma@yahoo.com';
-# EMAIL_HOST_PASSWORD = 'Django2014';
-# EMAIL_USE_TLS = True;
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#         'require_debug_false': {
-#             '()': 'django.utils.log.RequireDebugFalse'
-#         }
-#     },
-#     'handlers': {
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         }
-#     },
-#     'loggers': {
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': True,
-#         },
-#     }
-# }
