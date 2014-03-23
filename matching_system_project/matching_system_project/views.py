@@ -144,23 +144,23 @@ def add_position(request):
 
         print "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
 
-        reqProject = request.POST.__getitem__("projectName")
-        reqStarts = request.POST.__getitem__("starts")
-        reqExpires = request.POST.__getitem__("expires")
-
-        # print reqProject
-
-        context["projectName"]=reqProject
-
-        import forms
-
-        # state = forms.PositionForm.projectID(choices=formfields.State, initial='FIXED')
 
 
-        form = PositionForm({'projectID':reqProject, "dateTimeStarts":reqStarts, "dateTimeExpires":reqExpires} )
+        try:
+            reqProject = request.POST.__getitem__("projectName")
+            reqStarts = request.POST.__getitem__("starts")
+            reqExpires = request.POST.__getitem__("expires")
 
-        # form.title = Project.objects.get(projectName=reqProject)
+            import forms
 
+            context["projectName"]=reqProject
+            form = PositionForm({'projectID':reqProject, "dateTimeStarts":reqStarts, "dateTimeExpires":reqExpires} )
+
+        except:
+
+            import forms
+
+            form = PositionForm(request.POST)
 
         if form.is_valid():
 

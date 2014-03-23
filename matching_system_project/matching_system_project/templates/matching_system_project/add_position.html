@@ -32,5 +32,18 @@
                 </form>
             </div>
             <script>$('#id_dateTimeStarts, #id_dateTimeExpires, #id_dateTimeCreated').datepicker()</script>
+          <script>
+
+            var textToFind = '{{ projectName }}';
+
+            var dd = document.getElementById('id_projectID');
+            for (var i = 0; i < dd.options.length; i++) {
+              if (dd.options[i].text === textToFind) {
+                dd.selectedIndex = i;
+                break;
+              }
+            }
+
+          </script>
         </div>
         {% endblock %}
