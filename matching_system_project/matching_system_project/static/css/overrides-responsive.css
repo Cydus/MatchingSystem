@@ -8,9 +8,21 @@
   /*column-count:2;*/
 }
 
+#live-search .text-input {
+  color: #AFAFAF;
+}
+
+#live-search .using {
+  color: #333;
+}
+
 .colitem {
 float: left;
   width: 50%;
+}
+
+#id_fk_CreatedBy {
+  display: none;
 }
 
 .applied {
