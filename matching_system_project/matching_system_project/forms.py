@@ -58,7 +58,7 @@ class PositionForm(forms.ModelForm):
     # dateTimeCreated = forms.DateField(help_text="Enter the date when the position was created")
     dateTimeStarts = forms.DateField(help_text="Enter the date when the position will start")
     dateTimeExpires = forms.DateField(help_text="Enter the date when the position will expire")
-    url = forms.CharField(max_length=256, help_text="Enter the URL", )
+    # url = forms.CharField(max_length=256, help_text="Enter the URL")
     # isOpen = forms.BooleanField(help_text="Tick the box if the position is open")
 
     def clean(self):

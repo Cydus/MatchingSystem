@@ -27,7 +27,7 @@ class Position(models.Model):
     dateTimeCreated = models.DateField(auto_now_add=True, editable=False)
     dateTimeStarts = models.DateField(verbose_name="Start Date")
     dateTimeExpires = models.DateField(verbose_name="End Date")
-    url = models.CharField(max_length=256)
+    url = models.CharField(max_length=256, editable=False)
 
     fk_ApplicantID = models.ForeignKey(User, null=True, blank=True, editable=False)
     isOpen = models.BooleanField(default=True, editable=False)
