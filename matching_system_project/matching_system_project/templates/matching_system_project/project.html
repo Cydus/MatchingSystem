@@ -15,7 +15,7 @@
 {% block body_block %}
   <div class="alert alert-info ">
     <h1>{{ projectName }}</h1>
-    <p>Managed by <b>{{ project.fk_CreatedBy.first_name }} {{ project.fk_CreatedBy.last_name }}</b></p>
+    <p>Managed by <b>{{ project.fk_CreatedBy }}</b></p>
     <span>{{ description }}</span></div>
 
   {% if position_list %}

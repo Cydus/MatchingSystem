@@ -6,19 +6,27 @@
   <div class="alert alert-info ">
     <h1>3Sigma Project Matching System</h1>
 
-    <h3>Find the next project you want to work on!</h3>
+    <h3>Find interesting positions within the organization</h3>
   </div>
   <div class="alert alert-success ">
-    <h3>Available positions within projects</h3>
+    <h3>Positions are available!</h3>
 
   </div>
 
   <form id="live-search" action="" class="styled" method="post">
     <fieldset>
-      <input type="text" class="text-input" id="filter" value=""/>
+      <input type="text" class="text-input" id="filter" value="search for positons or projects"/>
       <span id="filter-count"></span>
     </fieldset>
   </form>
+
+  <script>
+    $('#live-search .text-input').click(function () {
+      $(this).val("");
+      $(this).addClass("using");
+    });
+
+  </script>
 
 
   <script type="text/javascript">
