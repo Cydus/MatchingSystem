@@ -20,16 +20,17 @@
 
   {% if position_list %}
 
-    <div class="alert-success alert"><h2>Open Positions</h2></div>
+
     <hr>
     {# ###### #}
 
         {% for position in position_list %}
+
           <div class="position">
           {% if projectName == position.projectID.projectName %}
             {% if position.isOpen %}
 
-              <hr>
+
               <h4><span class="span6 text-left ">{{ position.title }}</span></h4>
               <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
               <p>
@@ -60,7 +61,7 @@
                 </div>
 
                 {% endif %}
-
+              <hr>
 
             {% endif %}
           {% endif %}

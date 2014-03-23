@@ -5,7 +5,7 @@
    {% block body_block %}
 
       <div class="alert alert-info ">
-        <h1>Managing projects for {{ user }}</h1>
+        <h1>My Projects</h1>
       </div>
 
         {% if user.is_staff == 1%}
@@ -24,9 +24,10 @@
                {% for position in positions %}
 
                  {% if position.projectID == project %}
-                   <p><b>{{ position.title }}</b></p>
+{#                   <p><b>{{ position.title }}</b></p>#}
 
                  {% endif %}
+
                {% endfor %}
 
 

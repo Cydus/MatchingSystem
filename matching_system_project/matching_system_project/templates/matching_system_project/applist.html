@@ -46,6 +46,7 @@
       {% if  projects %}
           {% for project in projects %}
                 {% for position in positions %}
+                  {% if project.fk_CreatedBy == user %}
                   {% if position.projectID == project %}
                    {% for application in applications %}
                       {% if application.PositionID == position %}
@@ -76,6 +77,7 @@
                        {% endif %}
                       {% endif %}
                    {% endfor %}
+                  {% endif %}
                   {% endif %}
                 {% endfor %}
 
