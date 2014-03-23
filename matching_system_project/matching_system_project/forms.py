@@ -17,6 +17,7 @@ dateTimeCreated = forms.TextInput(attrs={'size': 10, 'title': 'Your name',})
 
 class ProjectForm(forms.ModelForm):
 
+    # fk_CreatedBy = forms.CharField(max_length=128, required=False)
     projectName = forms.CharField(max_length=128, help_text="Enter a project name")
     description = forms.CharField(max_length=999, help_text="Describe the project")
     # created = forms.DateField(help_text="Enter the date for creating this project")
@@ -35,11 +36,6 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
 
-
-def __init__(self, *args, **kwargs):
-            self._user = kwargs.pop('user')
-            super(ProjectForm, self).__init__(*args, **kwargs)
-
 def save(self, commit=True):
             inst = super(ProjectForm, self).save(commit=False)
             inst.fk_CreatedBy = self._user
@@ -54,6 +50,8 @@ class PositionForm(forms.ModelForm):
 
     from models import Project
 
+
+
     title = forms.CharField(max_length=128, help_text="Enter a position name")
     projectID = forms.ModelChoiceField(queryset=Project.objects.all(),help_text="Select Project")
     description = forms.CharField(max_length=999, help_text="Describe the position")
@@ -63,11 +61,11 @@ class PositionForm(forms.ModelForm):
     url = forms.CharField(max_length=256, help_text="Enter the URL", )
     # isOpen = forms.BooleanField(help_text="Tick the box if the position is open")
 
-
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
         cleaned_data['url'] = url
+
         return cleaned_data
 
     class Meta:

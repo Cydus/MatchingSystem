@@ -1,0 +1,72 @@
+{% extends 'matching_system_project/base.html' %}
+
+    {% load static %}
+    {% block title %}   {% endblock %}
+   {% block body_block %}
+
+      <div class="alert alert-info ">
+        <h1>Managing projects for {{ user }}</h1>
+      </div>
+
+        {% if user.is_staff == 1%}
+        {% else %}
+        <h1>Only Managers can access this page</h1>
+        {% endif %}
+
+        {% if projects %}
+          <hr>
+          {% for project in projects %}
+
+             {% if project.fk_CreatedBy == user %}
+               <h4><a href="/projects/{{ project.url }}"> {{ project.projectName }} </a></h4>
+
+
+               {% for position in positions %}
+
+                 {% if position.projectID == project %}
+                   <p><b>{{ position.title }}</b></p>
+
+                 {% endif %}
+               {% endfor %}
+
+
+<hr>
+                  {% endif %}
+                {% endfor %}
+             {% endif%}
+{#          {% endfor %}#}
+{#        {% endif %}#}
+
+
+
+
+
+      <input type="hidden" name="app_id" value="{{ application.id }}"/>
+
+      <script type="text/javascript">
+
+        $("a.accept").click(function(){
+
+          $(this).after('<div class="btn btn-success" style="width: 100px;">Accepted</div>')
+          $(this).remove();
+
+          var curr_elem = $(this) ;
+          $.get($(this).attr('href'), function(data){
+            var my_div = $(curr_elem).parent().find("b");
+            my_div.text(my_div.text()*1+1);
+          });
+
+          {#                $(this).addClass("accepted");#}
+
+          return false; // prevent loading URL from href
+        });
+      </script>
+
+
+
+
+  {% endblock  %}
+
+
+
+

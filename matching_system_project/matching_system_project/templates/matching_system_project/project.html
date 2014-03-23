@@ -15,12 +15,14 @@
 {% block body_block %}
   <div class="alert alert-info ">
     <h1>{{ projectName }}</h1>
+    <p>Managed by <b>{{ project.fk_CreatedBy.first_name }} {{ project.fk_CreatedBy.last_name }}</b></p>
     <span>{{ description }}</span></div>
 
   {% if position_list %}
-    <div class="alert-success alert"><h2>Open Positions</h2></div>
 
-{# ###### #}
+    <div class="alert-success alert"><h2>Open Positions</h2></div>
+    <hr>
+    {# ###### #}
 
         {% for position in position_list %}
           <div class="position">

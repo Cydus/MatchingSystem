@@ -123,6 +123,8 @@ def add_project(request):
         # this is returning an error when we add a new project so I commented it
         # form = ProjectForm(request.POST, user=request.user)
 
+
+
         form = ProjectForm(request.POST)
         if form.is_valid():
 
@@ -131,7 +133,11 @@ def add_project(request):
         else:
             print form.errors
     else:
-        form = ProjectForm()
+
+        nn = request.META.__getitem__("USER")
+        print request
+        form = ProjectForm({'fk_CreatedBy':User.objects.get(username=request.user.username)})
+
 
     return render_to_response('matching_system_project/add_project.html', {'form': form}, context)
 
@@ -200,6 +206,10 @@ def register(request):
             user.set_password((user.password))
             user.save()
             registered = True
+
+            user.backend = "django.contrib.auth.backends.ModelBackend"
+            login(request, user)
+
         else:
             print user_form.errors,
 
@@ -260,6 +270,26 @@ def applist(request):
      #'users':us_list,
                 }
     return render_to_response('matching_system_project/applist.html', context_dict, context)
+
+def pmprojects(request):
+
+    print "he applied!!!!!"
+
+    context = RequestContext(request)
+    proj_list=Project.objects.all()
+    pos_list=Position.objects.all()
+    app_list =Application.objects.all()
+    us_list=User.objects.all()
+
+
+    context_dict={
+        'projects':proj_list,
+        'positions':pos_list,
+        'applications':app_list,
+        'user':request.user,
+        #'users':us_list,
+    }
+    return render_to_response('matching_system_project/pm-projects.html', context_dict, context)
 
 def apply(request, uid, posid):
 

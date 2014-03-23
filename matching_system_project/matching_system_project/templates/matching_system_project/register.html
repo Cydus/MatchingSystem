@@ -11,9 +11,9 @@
 
     <div class="container">
       {% if registered %}
-        <p>Thank you for registering.</p>
+        <p>Thank you for registering {{ user }}</p>
 
-        <p><a href="/login/">Login </a>to Matching System.</p>
+        <p>Now <a href="/">Login </a>Find some projects to apply to!</p>
       {% else %}
         <form class="form-signin span8" id="user_form" method="post"
               action="/register/"
