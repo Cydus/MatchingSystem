@@ -16,12 +16,13 @@ from django import forms
 dateTimeCreated = forms.TextInput(attrs={'size': 10, 'title': 'Your name',})
 
 class ProjectForm(forms.ModelForm):
+
     projectName = forms.CharField(max_length=128, help_text="Enter a project name")
     description = forms.CharField(max_length=999, help_text="Describe the project")
     # created = forms.DateField(help_text="Enter the date for creating this project")
-    starts = forms.DateField(help_text="Enter the start day for the project")
-    expires = forms.DateField(help_text="Enter the expiration date")
-    active = forms.BooleanField(help_text="Is this project active yet?")
+    starts = forms.DateField(help_text="When will the project start? (dd/mm/YYYY)")
+    expires = forms.DateField(help_text="When will the project end? (dd/mm/YYYY)")
+    # active = forms.BooleanField(help_text="Is this project active yet?")
     url = forms.CharField(max_length=256, help_text="Enter the URL")
 
     def clean(self):

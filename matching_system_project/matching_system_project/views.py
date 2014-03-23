@@ -125,8 +125,9 @@ def add_project(request):
 
         form = ProjectForm(request.POST)
         if form.is_valid():
+
             form.save(commit=True)
-            return index(request)
+            return add_position(request)
         else:
             print form.errors
     else:
@@ -135,19 +136,48 @@ def add_project(request):
     return render_to_response('matching_system_project/add_project.html', {'form': form}, context)
 
 def add_position(request):
+    print request
 
     context = RequestContext(request)
+
     if request.method == 'POST':
-        form = PositionForm(request.POST)
+
+        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+
+        reqProject = request.POST.__getitem__("projectName")
+        reqStarts = request.POST.__getitem__("starts")
+        reqExpires = request.POST.__getitem__("expires")
+
+        # print reqProject
+
+        context["projectName"]=reqProject
+
+        import forms
+
+        # state = forms.PositionForm.projectID(choices=formfields.State, initial='FIXED')
+
+
+        form = PositionForm({'projectID':reqProject, "dateTimeStarts":reqStarts, "dateTimeExpires":reqExpires} )
+
+        # form.title = Project.objects.get(projectName=reqProject)
+
+
         if form.is_valid():
 
             form.save(commit=True)
             return index(request)
         else:
-            print form.errors
+             print form.errors
     else:
+
         form = PositionForm()
-    return render_to_response('matching_system_project/add_position.html', {'form': form}, context)
+
+
+        # print request.COOKIES.__getitem__("sessionid")
+        # print request.GET.__getitem__("META")
+
+
+    return render_to_response('matching_system_project/add_position.html', {'form': form}, context )
 
 def register(request):
     context = RequestContext(request)

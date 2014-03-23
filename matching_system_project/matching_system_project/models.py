@@ -9,7 +9,7 @@ class Project(models.Model):
     created = models.DateField(auto_now_add=True)
     starts = models.DateField(verbose_name="Start Date")
     expires = models.DateField(verbose_name="End Date")
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, editable=False)
     url = models.CharField(max_length=256)
 
     def post_save(self, request, extra_command="", *args, **kwargs):
