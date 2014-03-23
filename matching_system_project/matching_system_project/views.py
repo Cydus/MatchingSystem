@@ -4,8 +4,6 @@ from django.shortcuts import render_to_response
 from models import Project, Position, Application
 from django.db import models
 
-from django.contrib.auth import hashers
-
 from django.forms import CharField
 from django.core import validators
 
@@ -27,48 +25,81 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 
+import re
+
+from django.template import Library, Node
+from django.template.defaultfilters import stringfilter
+
+register = Library()
+
+def paragraphs(value):
+    paras = re.split(r'[\r\n]+', value)
+    paras = ['<p>%s</p>' % p.strip() for p in paras]
+    return '\n'.join(paras)
+
+paragraphs = stringfilter(paragraphs)
+
+register.filter(paragraphs)
+
+
 
 def index(request):
-    context = RequestContext(request)
+
+    context = RequestContext(request )
+
 
     position_list = Position.objects.all()
-    app_list = Application.objects.all()
-    pos_list = []
-    ap_list = []
+    app_list=Application.objects.all()
+    pos_list=[]
+    ap_list=[]
+    for p in position_list:
+        p.description=paragraphs(p.description)
+        pos_list.append(p)
 
-    position_dict = {'positions': position_list, 'applications': app_list}
-    return render_to_response('matching_system_project/index.html',
-                              position_dict, context)
+
+
+    position_dict ={'positions':pos_list,'applications':app_list}
+    return render_to_response('matching_system_project/index.html', position_dict, context)
 
     # return HttpResponse('<h1>Projects System</h1>' +
-    # '<a href="/projects">View Projects</a>')
+    #                     '<a href="/projects">View Projects</a>')
+
+
+
+
+
+
+
 
 
 def projects(request):
     return HttpResponse("PROJECTS IN YOUR FACE MOFO")
 
-
 def project(request, project_name_url):
     context = RequestContext(request)
-    project_name = project_name_url.replace('_', ' ')
+    project_name = project_name_url.replace('_', ' ' )
 
     project = Project.objects.get(url=project_name_url)
 
-    project_name = project_name_url.replace('_', ' ')
-    app_list = Application.objects.all()
+    project_name = project_name_url.replace('_', ' ' )
+    app_list=Application.objects.all()
     # position lis
 
     position_list = Position.objects.all()
     print position_list
+    p_list=[]
+    for p in position_list:
+      p.description=paragraphs(p.description)
+      p_list.append(p)
 
-    position_dict = {'positions': position_list}
+    position_dict ={'positions':position_list}
 
     context_dict = {'project_name': project_name}
     context_dict = {
         'projectName': project.projectName,
         'description': project.description,
-        'position_list': position_list,
-        'applications': app_list,
+        'position_list': p_list,
+        'applications':app_list,
 
     }
 
@@ -80,9 +111,9 @@ def project(request, project_name_url):
         # Don't do anything - the template displays the "no project" message for us.
         pass
 
-    # return HttpResponse("I AM A PROJECT")
-    return render_to_response('matching_system_project/project.html',
-                              context_dict, context)
+    #return HttpResponse("I AM A PROJECT")
+    return render_to_response('matching_system_project/project.html', context_dict, context)
+
 
 
 def add_project(request):
@@ -101,11 +132,10 @@ def add_project(request):
     else:
         form = ProjectForm()
 
-    return render_to_response('matching_system_project/add_project.html',
-                              {'form': form}, context)
-
+    return render_to_response('matching_system_project/add_project.html', {'form': form}, context)
 
 def add_position(request):
+
     context = RequestContext(request)
     if request.method == 'POST':
         form = PositionForm(request.POST)
@@ -117,9 +147,7 @@ def add_position(request):
             print form.errors
     else:
         form = PositionForm()
-    return render_to_response('matching_system_project/add_position.html',
-                              {'form': form}, context)
-
+    return render_to_response('matching_system_project/add_position.html', {'form': form}, context)
 
 def register(request):
     context = RequestContext(request)
@@ -128,9 +156,10 @@ def register(request):
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
-        # profile_form = UserProfileForm(data=request.POST)
+       # profile_form = UserProfileForm(data=request.POST)
 
         if user_form.is_valid():
+
             user = user_form.save()
 
             # if User.objects.filter(email=user.email).exists():
@@ -170,9 +199,7 @@ def user_login(request):
             print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render_to_response('matching_system_project/login.html', {},
-                                  context)
-
+        return render_to_response('matching_system_project/login.html', {}, context)
 
 @login_required
 def restricted(request):
@@ -186,44 +213,46 @@ def user_logout(request):
 
 
 def applist(request):
+
     print "he applied!!!!!"
 
     context = RequestContext(request)
-    proj_list = Project.objects.all()
-    pos_list = Position.objects.all()
-    app_list = Application.objects.all()
-    us_list = User.objects.all()
+    proj_list=Project.objects.all()
+    pos_list=Position.objects.all()
+    app_list =Application.objects.all()
+    us_list=User.objects.all()
 
-    context_dict = {
-        'projects': proj_list,
-        'positions': pos_list,
-        'applications': app_list,
-        # 'users':us_list,
-    }
-    return render_to_response('matching_system_project/applist.html',
-                              context_dict, context)
 
+    context_dict={
+     'projects':proj_list,
+     'positions':pos_list,
+     'applications':app_list,
+     #'users':us_list,
+                }
+    return render_to_response('matching_system_project/applist.html', context_dict, context)
 
 def apply(request, uid, posid):
+
+
     # from django.core import mail
     #
     # connection = mail.get_connection()
     #
     # # email = EmailMessage('Hello', 'World', to=['davidb1985@gmail.com'])
     # connection.send_mail('Subject', 'Message.', 'from@example.com',
-    # ['john@example.com', 'jane@example.com'])
+    #           ['john@example.com', 'jane@example.com'])
     #
     # connection.close()
 
     print "he applied!!!!!"
+
 
     pos = Position.objects.get(pk=posid)
     posuid = User.objects.get(pk=uid)
 
     print "position: " + pos.title + " applied for by: " + posuid.username
 
-    existingApplications = len(
-        Application.objects.filter(UserID=posuid, PositionID=pos))
+    existingApplications = len(Application.objects.filter(UserID = posuid, PositionID = pos))
     print existingApplications
 
     # print posuid
@@ -231,15 +260,15 @@ def apply(request, uid, posid):
 
     if existingApplications < 1:
 
-        Application.objects.create(
-            UserID=posuid,
-            PositionID=pos,
-            accepted=False,
-            seenByPM=False, )
+         Application.objects.create(
+            UserID = posuid,
+            PositionID = pos,
+            accepted = False,
+            seenByPM = False,)
 
     else:
 
-        print "you cannot apply more than twice"
+         print "you cannot apply more than twice"
 
 
 
@@ -261,55 +290,60 @@ def apply(request, uid, posid):
     return HttpResponseRedirect('/')
 
 
-def accept(request, appid):
-    if request.user.is_authenticated:
-        app = Application.objects.get(pk=appid)
 
-        if Application.objects.get(pk=appid).accepted == False:
 
-            app.accepted = True
-            app.seenByPM = True
 
-            app.save()
+def accept(request,appid):
 
-            pos = Position.objects.get(pk=app.PositionID.id)
-            pos.isOpen = False
-            pos.fk_ApplicantID = app.UserID
-            pos.save()
+  if  request.user.is_authenticated:
+    app= Application.objects.get(pk=appid)
 
-            embod = "Dear, " + app.UserID.first_name + " " + app.UserID.last_name + ",your application  for a   " + pos.title + " position " + " in " + pos.projectID.projectName + " was successfull." \
-                    + " Regards,  " + pos.projectID.fk_CreatedBy.first_name + "  " + pos.projectID.fk_CreatedBy.last_name
+    if Application.objects.get(pk=appid).accepted == False:
 
-            send_mail("Project Matching System", embod, 'vaspetr506@gmail.com',
-                      ['matchingsystem.3sigma@yahoo.com'], fail_silently=False)
-            # mail_admins("other subject","some text",fail_silently=False)
-            # Application.objects.set(seenByPm=True )
-            # Application.objects.set(accepted=True )
-            #  Application.objects.get(pk=appid).accepted=True
-            # Application.objects.get(pk=appid).seenByPm=True
-            # Application.objects.get(pk=appid).save()
+        app.accepted = True
+        app.seenByPM = True
 
-            print Application.objects.get(pk=appid).PositionID
-        else:
-            print "cannot accept application more than once"
+        app.save()
 
-        if 'HTTP_REFERER' in request.META:
-            return HttpResponseRedirect(request.META['HTTP_REFERER'])
-        return HttpResponseRedirect('/')
+        pos = Position.objects.get(pk=app.PositionID.id)
+        pos.isOpen = False
+        pos.fk_ApplicantID = app.UserID
+        pos.save()
+
+
+        embod="Dear, "+app.UserID.first_name +" "+app.UserID.last_name +",your application  for a   "+pos.title+" position " +" in "+pos.projectID.projectName +" was successfull." \
+               + " Regards,  " + pos.projectID.fk_CreatedBy.first_name +"  " + pos.projectID.fk_CreatedBy.last_name
+
+        send_mail("Project Matching System",embod  , 'vaspetr506@gmail.com',['matchingsystem.3sigma@yahoo.com'], fail_silently=False )
+        #mail_admins("other subject","some text",fail_silently=False)
+       # Application.objects.set(seenByPm=True )
+       # Application.objects.set(accepted=True )
+     #  Application.objects.get(pk=appid).accepted=True
+      # Application.objects.get(pk=appid).seenByPm=True
+      # Application.objects.get(pk=appid).save()
+
+        print Application.objects.get(pk=appid).PositionID
+    else:
+        print "cannot accept application more than once"
+
+    if 'HTTP_REFERER' in request.META:
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpResponseRedirect('/')
 
 
 def history(request):
-    context = RequestContext(request)
-    proj_list = Project.objects.all()
-    pos_list = Position.objects.all()
-    app_list = Application.objects.all()
-    us_list = User.objects.all()
-    context_dict = {
-        'projects': proj_list,
-        'positions': pos_list,
-        'applications': app_list,
-    }
 
-    return render_to_response('matching_system_project/history.html',
-                              context_dict, context)
+     context = RequestContext(request)
+     proj_list=Project.objects.all()
+     pos_list=Position.objects.all()
+     app_list =Application.objects.all()
+     us_list=User.objects.all()
+     context_dict={
+     'projects':proj_list,
+     'positions':pos_list,
+     'applications':app_list,
+                }
+
+
+     return render_to_response('matching_system_project/history.html',context_dict,context)
 

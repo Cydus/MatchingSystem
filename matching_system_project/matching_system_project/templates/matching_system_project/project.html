@@ -31,7 +31,7 @@
               <h4><span class="span6 text-left ">{{ position.title }}</span></h4>
               <span class="span6 text-right text-info">{{ position.dateTimeStarts }}  - {{ position.dateTimeExpires }}</span>
               <p>
-                {{ position.description }}
+                {{position.description|safe}}
 
 
               </p>
@@ -135,7 +135,7 @@
 
     $("a.apply").click(function () {
 
-      $(this).after('<div class="btn btn-success btn-small" style="width: 100px;">Applied</div>')
+      $(this).after('<div class="btn btn-success btn-small">Applied</div>')
       $(this).remove();
       var curr_elem = $(this);
 
