@@ -301,7 +301,7 @@ def accept(request, appid):
                     + " Regards,  " + pos.projectID.fk_CreatedBy.first_name + "  " + pos.projectID.fk_CreatedBy.last_name
 
             send_mail("Project Matching System", embod, 'vaspetr506@gmail.com',
-                      ['matchingsystem.3sigma@yahoo.com'], fail_silently=False)
+                      [pos.fk_ApplicantID.email], fail_silently=False)
 
             print Application.objects.get(pk=appid).PositionID
         else:
