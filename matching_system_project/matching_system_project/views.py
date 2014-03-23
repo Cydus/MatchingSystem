@@ -46,10 +46,6 @@ def index(request):
     return render_to_response('matching_system_project/index.html',
                               position_dict, context)
 
-    # return HttpResponse('<h1>Projects System</h1>' +
-    # '<a href="/projects">View Projects</a>')
-
-
 def projects(request):
     return HttpResponse("PROJECTS IN YOUR FACE MOFO")
 
@@ -62,7 +58,6 @@ def project(request, project_name_url):
 
     project_name = project_name_url.replace('_', ' ')
     app_list = Application.objects.all()
-    # position lis
 
     position_list = Position.objects.all()
     print position_list
@@ -99,11 +94,6 @@ def add_project(request):
     context = RequestContext(request)
     if request.method == 'POST':
 
-        # this is returning an error when we add a new project so I commented it
-        # form = ProjectForm(request.POST, user=request.user)
-
-
-
         form = ProjectForm(request.POST)
         if form.is_valid():
 
@@ -128,8 +118,6 @@ def add_position(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-
-        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
 
         try:
             reqProject = request.POST.__getitem__("projectName")
@@ -159,10 +147,6 @@ def add_position(request):
 
         form = PositionForm()
 
-
-        # print request.COOKIES.__getitem__("sessionid")
-        # print request.GET.__getitem__("META")
-
     return render_to_response('matching_system_project/add_position.html',
                               {'form': form}, context)
 
@@ -174,17 +158,11 @@ def register(request):
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
-        # profile_form = UserProfileForm(data=request.POST)
 
         if user_form.is_valid():
 
             user = user_form.save()
 
-            # if User.objects.filter(email=user.email).exists():
-            # #  user_form.email.default_error_messages
-            # print "error"
-            # else:
-            # user.set_password(make_password(user.password[]))
             user.set_password((user.password))
             user.save()
             registered = True
@@ -269,7 +247,6 @@ def pmprojects(request):
         'positions': pos_list,
         'applications': app_list,
         'user': request.user,
-        # 'users':us_list,
     }
     return render_to_response('matching_system_project/pm-projects.html',
                               context_dict, context)

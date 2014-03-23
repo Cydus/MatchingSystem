@@ -79,13 +79,9 @@
             <h4>{{ position.fk_ApplicantID }}</h4>
 
             <p>
-              {{ position.title }}
-              {#            {{position.dateTimeStarts}}  - {{position.dateTimeExpires}}#}
+              {{ position.title }}}
             </p>
-            {#          <a href="{{position.projectID}}">Apply</a>#}
-            {#           <hr>#}
           </div>
-          {#        {% endif %}#}
         {% endif %}
       {% endfor %}
       {% else %}
@@ -93,7 +89,6 @@
     </div>
   {% endif %}
 
-  <!--<a href="/admin/">ADMIN LOGIN</a><br />-->
   <input type="hidden" name="profile_id" value="{{ user.id }}"/>
 
   <script type="text/javascript">
@@ -117,8 +112,6 @@
         var my_div = $(curr_elem).parent().find("b");
         my_div.text(my_div.text() * 1 + 1);
       });
-
-      {#                      $(this).addClass("applied");#}
 
       return false; // prevent loading URL from href
 

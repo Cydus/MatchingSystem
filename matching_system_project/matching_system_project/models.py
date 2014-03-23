@@ -49,8 +49,6 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     seenByPM = models.BooleanField(default=False)
 
-    print "------ SETTING " + "" + " TO FALSE ---------"
-
     def pre_save(self, extra_command="", *args, **kwargs):
         print "lol"
         print self.PositionID.title
@@ -60,7 +58,6 @@ class Application(models.Model):
         print pos.isOpen
 
         pos.fk_ApplicantID = self.UserID
-        print "WWWWWWWWWWWWWWWWWWWWWWWWWWWW"
         pos.save()
 
         if (self.accepted == True):

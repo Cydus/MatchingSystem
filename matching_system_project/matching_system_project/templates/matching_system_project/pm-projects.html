@@ -26,7 +26,6 @@
         {% for position in positions %}
 
           {% if position.projectID == project %}
-            {#                   <p><b>{{ position.title }}</b></p>#}
 
           {% endif %}
 
@@ -37,11 +36,6 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-
-
-
-
-
 
   <input type="hidden" name="app_id" value="{{ application.id }}"/>
 
@@ -57,8 +51,6 @@
         var my_div = $(curr_elem).parent().find("b");
         my_div.text(my_div.text() * 1 + 1);
       });
-
-      {#                $(this).addClass("accepted");#}
 
       return false; // prevent loading URL from href
     });
