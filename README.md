@@ -9,9 +9,9 @@ achivements section of this readme.
 Usage
 -----
 
-A demo of the Project Matching System can be access on http://davidball.me
+A demo of the Project Matching System can be viewd on http://139.162.192.212
 
-1. You will want to register as a new applicant user and apply for some positions.
+1. To demo you will want to register as a new applicant user and apply for some positions.
 2. Log out.
 3. Log in as the project manager credentails, username: SarahJ, password: password
 4. Approve some of the applications you created and explore the interface.
