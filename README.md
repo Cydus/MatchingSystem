@@ -6,6 +6,8 @@ applications respectively. PMs also get to create projects and positions. We hav
 a list of functionality including ajax features and email notifications outlined in the
 achivements section of this readme.
 
+![Project application system homepage](http://i.imgur.com/vOj3J6r.png)
+
 Usage
 -----
 
