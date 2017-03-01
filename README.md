@@ -11,7 +11,7 @@ achivements section of this readme.
 Usage
 -----
 
-A demo of the Project Matching System can be viewd on http://139.162.192.212
+The Project Matching System can demoed at http://139.162.192.212
 
 1. To demo you will want to register as a new applicant user and apply for some positions.
 2. Log out.
